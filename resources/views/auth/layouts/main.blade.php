@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
   
-        <title>{{ $title ?? 'Kedai Jagat Kopi' }} | Kedai Jagat Kopi</title>
+        <title>{{ $title ?? 'Kedai Jagat Kopi' }} | Kedai Jabat Kopi</title>
         <link rel="icon" href="{{ asset('img/icon/icon.png') }}">
 
         {{-- CDN --}}
