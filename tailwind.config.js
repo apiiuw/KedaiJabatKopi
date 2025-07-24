@@ -10,6 +10,7 @@ export default {
     extend: {
       colors: {
         greenJagat: '#2E6342',
+        darkGreenJagat: '#1D462D',
       },
       fontFamily: {
         amiri: ['"Amiri"', 'sans-serif'],

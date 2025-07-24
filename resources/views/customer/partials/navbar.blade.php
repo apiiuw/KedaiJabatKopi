@@ -1,7 +1,7 @@
-<nav class=" bg-greenJagat border-gray-200">
+<nav id="navbar" class="w-full fixed top-0 left-0 z-50 bg-greenJagat transition duration-300 ease-in-out">
   <div class="w-full flex flex-wrap md:grid md:grid-cols-3 justify-between md:justify-center items-center mx-0 py-4">
     <div class="flex justify-start ml-5 md:ml-10">
-        <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="{{ route('customer.home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('img/icon/icon.png') }}" class="h-12" alt="Icon Jagat Kopi" />
         </a>
     </div>
@@ -54,15 +54,30 @@
       </div>
       <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium text-sm md:text-lg border border-gray-100 rounded-lg bg-gray-50 md:bg-transparent md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
         <li>
-          <a href="#" class="block py-2 px-3 text-white bg-greenJagat rounded-sm md:bg-transparent md:text-white md:p-0" aria-current="page">Home</a>
+          <a href="{{ route('customer.home') }}" class="block py-2 px-3 text-white bg-greenJagat rounded-sm md:bg-transparent md:text-white md:hover:text-gray-300 transition duration-500 ease-in-out md:p-0" aria-current="page">Home</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:text-white md:hover:text-gray-300 md:p-0">Menu</a>
+          <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:text-white md:hover:text-gray-300 transition duration-500 ease-in-out md:p-0">Menu</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:text-white md:hover:text-gray-300 md:p-0">About Us</a>
+          <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:text-white md:hover:text-gray-300 transition duration-500 ease-in-out md:p-0">About Us</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
+<script>
+  const navbar = document.getElementById('navbar');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) {
+      navbar.classList.remove('bg-greenJagat');
+      navbar.classList.add('backdrop-blur-md', 'bg-greenJagat/70');
+    } else {
+      navbar.classList.remove('backdrop-blur-md', 'bg-greenJagat/70');
+      navbar.classList.add('bg-greenJagat');
+    }
+  });
+</script>
+

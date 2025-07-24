@@ -20,7 +20,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     </head>
-    <body class="font-amiri antialiased overflow-x-hidden">
+    <body class="font-amiri antialiased overflow-x-hidden bg-greenJagat">
         @include('customer.partials.navbar')
         @yield('container')
         @include('customer.partials.footer')
