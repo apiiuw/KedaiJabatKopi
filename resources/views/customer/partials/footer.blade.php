@@ -4,7 +4,7 @@
           <div class="grid grid-cols-2 gap-1 sm:grid-cols-3 md:gap-x-64 w-full text-sm md:text-lg">
               <div class="w-4/5">
                 <div class="flex items-end justify-start mb-1">
-                    <img src="{{ asset('img/home/icon-location.png') }}" class="h-8 mr-2" alt="Icon Location">
+                    <img src="{{ asset('img/icon/icon-location.png') }}" class="h-8 mr-2" alt="Icon Location">
                     <h2 class="text-white text-lg md:text-2xl uppercase">Location</h2>
                 </div>
                   <hr class="mb-6">
@@ -16,7 +16,7 @@
               </div>
               <div class="w-4/5">
                 <div class="flex items-end justify-start mb-1">
-                    <img src="{{ asset('img/home/icon-call.png') }}" class="h-8 mr-2" alt="Icon Call">
+                    <img src="{{ asset('img/icon/icon-call.png') }}" class="h-8 mr-2" alt="Icon Call">
                     <h2 class="text-white text-lg md:text-2xl uppercase">Contact Us</h2>
                 </div>
                   <hr class="mb-6">
@@ -31,7 +31,7 @@
               </div class="w-4/5">
               <div>
                 <div class="flex items-end justify-start mb-1">
-                    <img src="{{ asset('img/home/icon-home.png') }}" class="h-8 mr-2" alt="Icon Home">
+                    <img src="{{ asset('img/icon/icon-home.png') }}" class="h-8 mr-2" alt="Icon Home">
                     <h2 class="text-white text-lg md:text-2xl uppercase">Sitemap</h2>
                 </div>
                 <hr class="mb-6">
