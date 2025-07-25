@@ -54,13 +54,23 @@
       </div>
       <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium text-sm md:text-lg border border-gray-100 rounded-lg bg-gray-50 md:bg-transparent md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
         <li>
-          <a href="{{ route('customer.home') }}" class="block py-2 px-3 text-white bg-greenJagat rounded-sm md:bg-transparent md:text-white md:hover:text-gray-300 transition duration-500 ease-in-out md:p-0" aria-current="page">Home</a>
+          <a href="{{ route('customer.home') }}" class="{{ request()->is('/') ? 'md:underline bg-greenJagat text-white' : 'md:hover:text-gray-300' }} block py-2 px-3 rounded-sm md:hover:bg-transparent md:bg-transparent md:text-white transition duration-500 ease-in-out md:p-0" aria-current="page">Home</a>
         </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:text-white md:hover:text-gray-300 transition duration-500 ease-in-out md:p-0">Menu</a>
+        <li class="{{ request()->is('menu') ? 'bg-greenJagat text-white' : '' }} relative block py-2 px-3 rounded-sm md:hover:bg-transparent md:bg-transparent md:text-white transition duration-500 ease-in-out md:p-0">
+          <button onclick="toggleSubMenu()" class="{{ request()->is('menu') ? 'md:underline' : '' }} flex w-full justify-between items-center rounded-sm md:bg-transparent md:text-white transition duration-300 ease-in-out">
+            Menu
+            <svg class="w-4 h-4 transition-transform duration-300 ml-1" id="submenu-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <!-- Submenu -->
+          <ul id="submenu" class="absolute left-0 mt-2 md:mt-[1.6rem] hidden text-black md:text-white w-full md:w-40 z-50 bg-white md:bg-greenJagat/70 md:backdrop-blur-md">
+            <li><a href="{{ route('customer.menu') }}" class="{{ request()->is('menu') ? 'md:underline bg-greenJagat text-white' : '' }} block px-4 py-2 md:hover:text-gray-300 md:text-white transition duration-300 ease-in-out">The Drink</a></li>
+            <li><a href="#noncoffee" class="block px-4 py-2 md:hover:text-gray-300 transition duration-300 ease-in-out">The Food</a></li>
+          </ul>
         </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:text-white md:hover:text-gray-300 transition duration-500 ease-in-out md:p-0">About Us</a>
+          <a href="{{ route('customer.about-us') }}" class="{{ request()->is('about-us') ? 'md:underline bg-greenJagat text-white' : 'md:hover:text-gray-300' }} block py-2 px-3 rounded-sm md:hover:bg-transparent md:bg-transparent md:text-white transition duration-500 ease-in-out md:p-0">About Us</a>
         </li>
       </ul>
     </div>
@@ -72,6 +82,7 @@
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 10) {
+      // Navbar blur dan transparan
       navbar.classList.remove('bg-greenJagat');
       navbar.classList.add('backdrop-blur-md', 'bg-greenJagat/70');
     } else {
@@ -80,4 +91,24 @@
     }
   });
 </script>
+
+<script>
+  function toggleSubMenu() {
+    const submenu = document.getElementById("submenu");
+    const arrow = document.getElementById("submenu-arrow");
+    submenu.classList.toggle("hidden");
+    arrow.classList.toggle("rotate-180");
+  }
+
+  // Optional: klik di luar submenu akan menutup submenu
+  document.addEventListener("click", function (event) {
+    const button = event.target.closest("button[onclick='toggleSubMenu()']");
+    const submenu = document.getElementById("submenu");
+    if (!button && !event.target.closest("#submenu")) {
+      submenu.classList.add("hidden");
+      document.getElementById("submenu-arrow")?.classList.remove("rotate-180");
+    }
+  });
+</script>
+
 

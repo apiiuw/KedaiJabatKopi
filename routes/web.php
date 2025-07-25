@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SignInController;
 use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Controllers\Customer\HomeController;
+use App\Http\Controllers\Customer\MenuController;
+use App\Http\Controllers\Customer\AboutUsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,8 @@ Route::get('/auth/sign-up', [SignUpController::class, 'index'])->name('auth.sign
 
 // ROLE CUSTOMER
 Route::get('/', [HomeController::class, 'index'])->name('customer.home');
+Route::get('/menu', [MenuController::class, 'index'])->name('customer.menu');
+Route::get('/about-us', [AboutUsController::class, 'index'])->name('customer.about-us');
 
 // ROLE CASHIER
 
