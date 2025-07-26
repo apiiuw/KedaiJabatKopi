@@ -26,7 +26,7 @@
                     </svg>
                 </div>
             </div>
-
+ 
             <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="{{ asset('img/icon/icon-cart.png') }}" class="h-12" alt="Icon Jagat Kopi" />
             </a>

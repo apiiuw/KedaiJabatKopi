@@ -6,10 +6,7 @@
   
         <title>{{ $title ?? 'Kedai Jagat Kopi' }} | Kedai Jabat Kopi</title>
         <link rel="icon" href="{{ asset('img/icon/icon.png') }}">
-
-        {{-- CDN --}}
-        <script src="https://kit.fontawesome.com/d7833bfda5.js" crossorigin="anonymous"></script>
-
+        
         {{-- FONT --}}
         <link href="https://fonts.cdnfonts.com/css/amiri" rel="stylesheet">
         <link href="https://fonts.cdnfonts.com/css/calistoga-2" rel="stylesheet">
@@ -26,5 +23,8 @@
         @include('customer.partials.footer')
         <script type="module" src="{{ asset('resources/js/app.js') }}"></script> 
         <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+        <script defer src="https://js.stripe.com/v3/"></script>
+        <script defer src="https://m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
     </body>
 </html>
