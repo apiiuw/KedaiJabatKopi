@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\MenuController;
 use App\Http\Controllers\Customer\AboutUsController;
+use App\Http\Controllers\Customer\CartController;
+use App\Http\Controllers\Customer\DetailItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,9 @@ Route::get('/auth/sign-up', [SignUpController::class, 'index'])->name('auth.sign
 Route::get('/', [HomeController::class, 'index'])->name('customer.home');
 Route::get('/menu', [MenuController::class, 'index'])->name('customer.menu');
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('customer.about-us');
+Route::get('/cart', [CartController::class, 'index'])->name('customer.cart');
+
+Route::get('/detail-item', [DetailItemController::class, 'index'])->name('customer.detail-item');
 
 // ROLE CASHIER
 

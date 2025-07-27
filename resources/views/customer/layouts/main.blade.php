@@ -14,6 +14,13 @@
         {{-- ICON --}}
         <script src="https://kit.fontawesome.com/d7833bfda5.js" crossorigin="anonymous"></script>
 
+        {{-- DAISY UI --}}
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+        {{-- ALPINE JS --}}
+        <script src="//unpkg.com/alpinejs" defer></script>
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     </head>

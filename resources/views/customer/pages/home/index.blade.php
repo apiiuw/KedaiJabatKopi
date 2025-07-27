@@ -22,7 +22,7 @@
                 </a>
             </div>
         </div>
-        <div class="flex justify-end items-center">
+        <div class="flex justify-end items-center md:mt-20">
             <img src="{{ asset('img/home/landing-page.jpg') }}" 
                 class=" h-64 w-64 md:h-[33rem] md:w-[33rem] rounded-full border-4 border-white object-cover" 
                 alt="Jabat Kopi">
