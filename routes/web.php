@@ -1,14 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\SignInController;
-use App\Http\Controllers\Auth\SignOutController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\MenuController;
 use App\Http\Controllers\Customer\AboutUsController;
 use App\Http\Controllers\Customer\CartController;
 use App\Http\Controllers\Customer\DetailItemController;
 use App\Http\Controllers\Cashier\DashboardController;
+use App\Http\Controllers\Cashier\OrderController;
+use App\Http\Controllers\Cashier\PastOrderController;
+use App\Http\Controllers\Cashier\ManageMenuController;
+use App\Http\Controllers\Cashier\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,18 +25,30 @@ use App\Http\Controllers\Cashier\DashboardController;
 */
 
 // AUTH
-Route::get('/auth/sign-in', [SignInController::class, 'index'])->name('auth.sign-in');
-Route::get('/auth/sign-out', [SignOutController::class, 'index'])->name('auth.sign-out');
+Route::get('/auth/sign-in', [AuthController::class, 'index'])->name('auth.sign-in');
+Route::post('/auth/sign-in', [AuthController::class, 'signIn'])->name('auth.sign-in.post');
+Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
+Route::get('/auth/sign-out', [AuthController::class, 'signOut'])->name('auth.sign-out');
 
 // ROLE CUSTOMER
 Route::get('/', [HomeController::class, 'index'])->name('customer.home');
 Route::get('/menu', [MenuController::class, 'index'])->name('customer.menu');
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('customer.about-us');
 Route::get('/cart', [CartController::class, 'index'])->name('customer.cart');
-
 Route::get('/detail-item', [DetailItemController::class, 'index'])->name('customer.detail-item');
 
 // ROLE CASHIER
-Route::get('/cashier/dashboard', [DashboardController::class, 'index'])->name('cashier.dashboard');
+Route::middleware('role:cashier')->group(function () {
+    Route::get('/cashier/dashboard', [DashboardController::class, 'index'])->name('cashier.dashboard');
+    Route::get('/cashier/order', [OrderController::class, 'index'])->name('cashier.order');
+    Route::get('/cashier/past-order', [PastOrderController::class, 'index'])->name('cashier.past-order');
+    Route::get('/cashier/manage-menu', [ManageMenuController::class, 'index'])->name('cashier.manage-menu');
+    Route::get('/cashier/report', [ReportController::class, 'index'])->name('cashier.report');
+});
 
 // ROLE OWNER
+Route::middleware('role:owner')->group(function () {
+    // Contoh:
+    // Route::get('/owner/dashboard', [OwnerDashboardController::class, 'index'])->name('owner.dashboard');
+});

@@ -3,7 +3,7 @@
 
 <div class="p-4 sm:ml-64">
    <div class="p-4">
-      <h1 class="font-calistoga text-greenJagat text-3xl mb-6">Report</h1>
+      <h1 class="font-calistoga text-greenJagat text-3xl mb-6">Past Order</h1>
       <div class="grid grid-cols-3 gap-4 mb-4">
 
          <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md text-white">

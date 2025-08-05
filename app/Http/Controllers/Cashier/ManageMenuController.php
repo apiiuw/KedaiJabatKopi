@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Cashier;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class ManageMenuController extends Controller
 {
     public function index()
     {
-        $title = 'Cashier Dashboard';
+        $title = 'Cashier Manage Menu';
 
-        return view('cashier.pages.dashboard.index', compact('title'));
+        return view('cashier.pages.manage-menu.index', compact('title'));
     }
 }

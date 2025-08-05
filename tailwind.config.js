@@ -11,6 +11,7 @@ export default {
       colors: {
         greenJagat: '#2E6342',
         darkGreenJagat: '#1D462D',
+        lightGreenJagat: '#9FB9A9',
       },
       fontFamily: {
         amiri: ['"Amiri"', 'sans-serif'],
