@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SignInController;
-use App\Http\Controllers\Auth\SignUpController;
+use App\Http\Controllers\Auth\SignOutController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\MenuController;
 use App\Http\Controllers\Customer\AboutUsController;
 use App\Http\Controllers\Customer\CartController;
 use App\Http\Controllers\Customer\DetailItemController;
+use App\Http\Controllers\Cashier\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,7 @@ use App\Http\Controllers\Customer\DetailItemController;
 
 // AUTH
 Route::get('/auth/sign-in', [SignInController::class, 'index'])->name('auth.sign-in');
-Route::get('/auth/sign-up', [SignUpController::class, 'index'])->name('auth.sign-up');
+Route::get('/auth/sign-out', [SignOutController::class, 'index'])->name('auth.sign-out');
 
 // ROLE CUSTOMER
 Route::get('/', [HomeController::class, 'index'])->name('customer.home');
@@ -33,6 +34,6 @@ Route::get('/cart', [CartController::class, 'index'])->name('customer.cart');
 Route::get('/detail-item', [DetailItemController::class, 'index'])->name('customer.detail-item');
 
 // ROLE CASHIER
-
+Route::get('/cashier/dashboard', [DashboardController::class, 'index'])->name('cashier.dashboard');
 
 // ROLE OWNER
