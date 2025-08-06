@@ -46,8 +46,12 @@ Route::middleware('role:cashier')->group(function () {
 
     // Manage Menu
     Route::get('/cashier/manage-menu', [ManageMenuController::class, 'index'])->name('cashier.manage-menu');
+
     Route::get('/cashier/manage-menu/add-menu', [ManageMenuController::class, 'addMenu'])->name('cashier.manage-menu.add');
     Route::post('/cashier/manage-menu/add-menu/store', [ManageMenuController::class, 'store'])->name('cashier.manage-menu.store');
+
+    Route::get('/cashier/manage-menu/edit-menu/{id_menu}', [ManageMenuController::class, 'editMenu'])->name('cashier.manage-menu.edit');
+    Route::put('/cashier/manage-menu/edit-menu/{id_menu}/update', [ManageMenuController::class, 'update'])->name('cashier.manage-menu.update');
 
     // Report
     Route::get('/cashier/report', [ReportController::class, 'index'])->name('cashier.report');

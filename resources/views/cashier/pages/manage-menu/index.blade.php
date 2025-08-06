@@ -10,7 +10,7 @@
             <i class="fa-solid fa-mug-hot fa-2xl text-white"></i>
             <div class="flex flex-col items-start">
                <h1 class="text-white font-semibold text-xl">Total Drinks</h1>
-               <p class="text-2xl text-white">13</p>
+               <p class="text-2xl text-white">{{ $totalDrinks }}</p>
             </div>
          </div>
 
@@ -18,17 +18,17 @@
             <i class="fa-solid fa-utensils fa-2xl text-white"></i>
             <div class="flex flex-col items-start">
                <h1 class="text-white font-semibold text-xl">Total Foods</h1>
-               <p class="text-2xl text-white">8</p>
+               <p class="text-2xl text-white">{{ $totalFoods }}</p>
             </div>
          </div>
 
          <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md text-white">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-[38px]" viewBox="0 -960 960 960" fill="currentColor">
-                <path d="M533-440q-32-45-84.5-62.5T340-520q-56 0-108.5 17.5T147-440h386ZM40-360q0-109 91-174.5T340-600q118 0 209 65.5T640-360H40Zm0 160v-80h600v80H40ZM720-40v-80h56l56-560H450l-10-80h200v-160h80v160h200L854-98q-3 25-22 41.5T788-40h-68Zm0-80h56-56ZM80-40q-17 0-28.5-11.5T40-80v-40h600v40q0 17-11.5 28.5T600-40H80Zm260-400Z"/>
+               <path d="M533-440q-32-45-84.5-62.5T340-520q-56 0-108.5 17.5T147-440h386ZM40-360q0-109 91-174.5T340-600q118 0 209 65.5T640-360H40Zm0 160v-80h600v80H40ZM720-40v-80h56l56-560H450l-10-80h200v-160h80v160h200L854-98q-3 25-22 41.5T788-40h-68Zm0-80h56-56ZM80-40q-17 0-28.5-11.5T40-80v-40h600v40q0 17-11.5 28.5T600-40H80Zm260-400Z"/>
             </svg>     
             <div class="flex flex-col items-start">
                <h1 class="text-white font-semibold text-xl">Total Menus</h1>
-               <p class="text-2xl text-white">21</p>
+               <p class="text-2xl text-white">{{ $totalMenus }}</p>
             </div>
          </div>
 
@@ -52,68 +52,93 @@
          <table class="w-full text-md text-left rtl:text-right text-greenJagat">
             <thead class="text-md text-greenJagat uppercase bg-lightGreenJagat">
                <tr>
-                     <th scope="col" class="px-6 py-3">Product name</th>
-                     <th scope="col" class="px-6 py-3">Category</th>
-                     <th scope="col" class="px-6 py-3">Sweetness</th>
-                     <th scope="col" class="px-6 py-3">Espresso</th>
-                     <th scope="col" class="px-6 py-3">Price</th>
-                     <th scope="col" class="px-6 py-3">Availability</th>
-                     <th scope="col" class="px-6 py-3"><span class="sr-only">Edit</span></th>
+                  <th scope="col" class="px-6 py-3">ID Menu</th>
+                  <th scope="col" class="px-6 py-3">Product name</th>
+                  <th scope="col" class="px-6 py-3">Category</th>
+                  <th scope="col" class="px-6 py-3">Sweetness</th>
+                  <th scope="col" class="px-6 py-3">Espresso</th>
+                  <th scope="col" class="px-6 py-3">Price</th>
+                  <th scope="col" class="px-6 py-3">Availability</th>
+                  <th scope="col" class="px-6 py-3"><span class="sr-only">Edit</span></th>
                </tr>
             </thead>
             <tbody>
-               <tr class="bg-white border-b border-gray-200 hover:bg-[#F3F7F5]">
-                     <th scope="row" class="px-6 py-4 whitespace-nowrap">Americano</th>
-                     <td class="px-6 py-4">Drink</td>
-                     <td class="px-6 py-4">
-                        <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">Active</span>
-                     </td>
-                     <td class="px-6 py-4">
-                        <span class="bg-red-100 text-red-800 text-sm font-medium px-2.5 py-0.5 rounded">Non Active</span>
-                     </td>
-                     <td class="px-6 py-4">Rp 23.000</td>
-                     <td class="px-6 py-4">Available</td>
-                     <td class="px-6 py-4 text-right">
-                        <a href="#" class="font-medium text-greenJagat hover:underline">Edit</a>
-                     </td>
-               </tr>
+               @foreach($menus as $menu)
+                  <tr class="bg-white border-b border-gray-200 hover:bg-[#F3F7F5]">
+                        {{-- ID Menu diawali # --}}
+                        <th scope="row" class="px-6 py-4 whitespace-nowrap">#{{ $menu->id_menu }}</th>
 
-               <tr class="bg-white border-b border-gray-200 hover:bg-[#F3F7F5]">
-                     <th scope="row" class="px-6 py-4 whitespace-nowrap">Matcha Latte</th>
-                     <td class="px-6 py-4">Drink</td>
-                     <td class="px-6 py-4">
-                        <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">Active</span>
-                     </td>
-                     <td class="px-6 py-4">
-                        <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">Active</span>
-                     </td>
-                     <td class="px-6 py-4">Rp 35.000</td>
-                     <td class="px-6 py-4">Not Available</td>
-                     <td class="px-6 py-4 text-right">
-                        <a href="#" class="font-medium text-greenJagat hover:underline">Edit</a>
-                     </td>
-               </tr>
+                        {{-- Nama Produk --}}
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $menu->product_name }}</td>
 
-               <tr class="bg-white border-b border-gray-200 hover:bg-[#F3F7F5]">
-                     <th scope="row" class="px-6 py-4 whitespace-nowrap">Long Black</th>
-                     <td class="px-6 py-4">Drink</td>
-                     <td class="px-6 py-4">
-                        <span class="bg-red-100 text-red-800 text-sm font-medium px-2.5 py-0.5 rounded">Non Active</span>
-                     </td>
-                     <td class="px-6 py-4">
-                        <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">Active</span>
-                     </td>
-                     <td class="px-6 py-4">Rp 25.000</td>
-                     <td class="px-6 py-4">Available</td>
-                     <td class="px-6 py-4 text-right">
-                        <a href="#" class="font-medium text-greenJagat hover:underline">Edit</a>
-                     </td>
-               </tr>
+                        {{-- Category --}}
+                        <td class="px-6 py-4">{{ $menu->category }}</td>
+
+                        {{-- Sweetness --}}
+                        <td class="px-6 py-4">
+                           @if($menu->sweetness == 1)
+                              <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">Active</span>
+                           @else
+                              <span class="bg-red-100 text-red-800 text-sm font-medium px-2.5 py-0.5 rounded">Non Active</span>
+                           @endif
+                        </td>
+
+                        {{-- Espresso --}}
+                        <td class="px-6 py-4">
+                           @if($menu->espresso == 1)
+                              <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">Active</span>
+                           @else
+                              <span class="bg-red-100 text-red-800 text-sm font-medium px-2.5 py-0.5 rounded">Non Active</span>
+                           @endif
+                        </td>
+
+                        {{-- Price --}}
+                        <td class="px-6 py-4">Rp {{ number_format($menu->price, 0, ',', '.') }}</td>
+
+                        {{-- Availability --}}
+                        <td class="px-6 py-4">{{ $menu->availability }}</td>
+
+                        {{-- Edit Button --}}
+                        <td class="px-6 py-4 text-right">
+                           <a href="{{ route('cashier.manage-menu.edit', $menu->id_menu) }}" 
+                              class="font-calistoga text-greenJagat hover:underline">
+                              Edit
+                           </a>
+                        </td>
+                  </tr>
+               @endforeach
             </tbody>
          </table>
       </div>
 
    </div>
 </div>
+
+@push('scripts')
+   @if(session('success'))
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script>
+      document.addEventListener('DOMContentLoaded', function () {
+         const Toast = Swal.mixin({
+               toast: true,
+               position: 'top-end',
+               showConfirmButton: false,
+               timer: 4000,
+               timerProgressBar: false,
+               didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+               }
+         });
+
+         Toast.fire({
+               icon: 'success',
+               title: '{{ session('success') }}',
+         });
+      });
+   </script>
+   @endif
+@endpush
+
 
 @endsection
