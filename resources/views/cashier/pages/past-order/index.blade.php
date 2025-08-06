@@ -15,7 +15,7 @@
          </div>
 
          <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md">
-            <i class="fa-solid fa-rupiah-sign fa-2xl text-white"></i>
+            <i class="fa-solid fa-sack-dollar fa-2xl text-white"></i>
             <div class="flex flex-col items-start">
                <h1 class="text-white font-semibold text-xl">Total Income</h1>
                <p class="text-2xl text-white">Rp 1.215.000</p>

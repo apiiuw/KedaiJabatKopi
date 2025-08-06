@@ -24,6 +24,7 @@
     <body class="font-amiri antialiased overflow-x-hidden">
         @include('cashier.partials.sidebar')
         @yield('container')
+        @stack('scripts')
         <script type="module" src="{{ asset('resources/js/app.js') }}"></script> 
         <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 

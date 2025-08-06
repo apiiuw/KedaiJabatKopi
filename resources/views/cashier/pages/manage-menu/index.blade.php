@@ -34,8 +34,15 @@
 
       </div>
 
-      <div class="flex justify-end items-center mb-4">
-         <a href="#" class="flex justify-center items-center py-2 px-4 bg-greenJagat text-md hover:bg-darkGreenJagat text-white rounded-md">
+      <div class="flex justify-between items-center mb-4">
+         {{-- Search --}}
+         <div class="relative w-1/3">
+            <input type="text" placeholder="Search menu..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-greenJagat outline-none text-greenJagat">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400"></i>
+         </div>
+
+         {{-- Add Menu --}}
+         <a href="{{ route('cashier.manage-menu.add') }}" class="flex justify-center items-center py-2 px-4 bg-greenJagat text-md hover:bg-darkGreenJagat text-white rounded-md transition duration-500 ease-in-out">
             <i class="fa-solid fa-plus pb-1 mr-2"></i>
             <h1>Add Menu</h1>
          </a>
@@ -44,76 +51,64 @@
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
          <table class="w-full text-md text-left rtl:text-right text-greenJagat">
             <thead class="text-md text-greenJagat uppercase bg-lightGreenJagat">
-                  <tr>
-                     <th scope="col" class="px-6 py-3">
-                        Product name
-                     </th>
-                     <th scope="col" class="px-6 py-3">
-                        Category
-                     </th>
-                     <th scope="col" class="px-6 py-3">
-                        Price
-                     </th>
-                     <th scope="col" class="px-6 py-3">
-                        Availability
-                     </th>
-                     <th scope="col" class="px-6 py-3">
-                        <span class="sr-only">Edit</span>
-                     </th>
-                  </tr>
+               <tr>
+                     <th scope="col" class="px-6 py-3">Product name</th>
+                     <th scope="col" class="px-6 py-3">Category</th>
+                     <th scope="col" class="px-6 py-3">Sweetness</th>
+                     <th scope="col" class="px-6 py-3">Espresso</th>
+                     <th scope="col" class="px-6 py-3">Price</th>
+                     <th scope="col" class="px-6 py-3">Availability</th>
+                     <th scope="col" class="px-6 py-3"><span class="sr-only">Edit</span></th>
+               </tr>
             </thead>
             <tbody>
-                  <tr class="bg-white border-b border-gray-200 hover:bg-[#F3F7F5]">
-                     <th scope="row" class="px-6 py-4 whitespace-nowrap">
-                        Americano
-                     </th>
+               <tr class="bg-white border-b border-gray-200 hover:bg-[#F3F7F5]">
+                     <th scope="row" class="px-6 py-4 whitespace-nowrap">Americano</th>
+                     <td class="px-6 py-4">Drink</td>
                      <td class="px-6 py-4">
-                        Drink
+                        <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">Active</span>
                      </td>
                      <td class="px-6 py-4">
-                        Rp 23.000
+                        <span class="bg-red-100 text-red-800 text-sm font-medium px-2.5 py-0.5 rounded">Non Active</span>
                      </td>
-                     <td class="px-6 py-4">
-                        Available
-                     </td>
+                     <td class="px-6 py-4">Rp 23.000</td>
+                     <td class="px-6 py-4">Available</td>
                      <td class="px-6 py-4 text-right">
                         <a href="#" class="font-medium text-greenJagat hover:underline">Edit</a>
                      </td>
-                  </tr>
-                  <tr class="bg-white border-b border-gray-200 hover:bg-[#F3F7F5]">
-                     <th scope="row" class="px-6 py-4 whitespace-nowrap">
-                        Matcha Latte
-                     </th>
+               </tr>
+
+               <tr class="bg-white border-b border-gray-200 hover:bg-[#F3F7F5]">
+                     <th scope="row" class="px-6 py-4 whitespace-nowrap">Matcha Latte</th>
+                     <td class="px-6 py-4">Drink</td>
                      <td class="px-6 py-4">
-                        Drink
+                        <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">Active</span>
                      </td>
                      <td class="px-6 py-4">
-                        Rp 35.000
+                        <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">Active</span>
                      </td>
-                     <td class="px-6 py-4">
-                        Not Available
-                     </td>
+                     <td class="px-6 py-4">Rp 35.000</td>
+                     <td class="px-6 py-4">Not Available</td>
                      <td class="px-6 py-4 text-right">
                         <a href="#" class="font-medium text-greenJagat hover:underline">Edit</a>
                      </td>
-                  </tr>
-                  <tr class="bg-white border-b border-gray-200 hover:bg-[#F3F7F5]">
-                     <th scope="row" class="px-6 py-4 whitespace-nowrap">
-                        Long Black
-                     </th>
+               </tr>
+
+               <tr class="bg-white border-b border-gray-200 hover:bg-[#F3F7F5]">
+                     <th scope="row" class="px-6 py-4 whitespace-nowrap">Long Black</th>
+                     <td class="px-6 py-4">Drink</td>
                      <td class="px-6 py-4">
-                        Drink
+                        <span class="bg-red-100 text-red-800 text-sm font-medium px-2.5 py-0.5 rounded">Non Active</span>
                      </td>
                      <td class="px-6 py-4">
-                        Rp 25.000
+                        <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">Active</span>
                      </td>
-                     <td class="px-6 py-4">
-                        Available
-                     </td>
+                     <td class="px-6 py-4">Rp 25.000</td>
+                     <td class="px-6 py-4">Available</td>
                      <td class="px-6 py-4 text-right">
                         <a href="#" class="font-medium text-greenJagat hover:underline">Edit</a>
                      </td>
-                  </tr>
+               </tr>
             </tbody>
          </table>
       </div>

@@ -43,7 +43,13 @@ Route::middleware('role:cashier')->group(function () {
     Route::get('/cashier/dashboard', [DashboardController::class, 'index'])->name('cashier.dashboard');
     Route::get('/cashier/order', [OrderController::class, 'index'])->name('cashier.order');
     Route::get('/cashier/past-order', [PastOrderController::class, 'index'])->name('cashier.past-order');
+
+    // Manage Menu
     Route::get('/cashier/manage-menu', [ManageMenuController::class, 'index'])->name('cashier.manage-menu');
+    Route::get('/cashier/manage-menu/add-menu', [ManageMenuController::class, 'addMenu'])->name('cashier.manage-menu.add');
+    Route::post('/cashier/manage-menu/add-menu/store', [ManageMenuController::class, 'store'])->name('cashier.manage-menu.store');
+
+    // Report
     Route::get('/cashier/report', [ReportController::class, 'index'])->name('cashier.report');
 });
 
