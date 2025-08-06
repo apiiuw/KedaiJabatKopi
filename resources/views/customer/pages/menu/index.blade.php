@@ -35,11 +35,11 @@
     </div>
 
     @foreach($menus as $type => $items)
-        <div class="w-full flex justify-start items-start px-32 pt-10">
+        <div class="w-full flex justify-start items-start px-2 md:px-32 pt-5 md:pt-10">
             <h1 class="font-calistoga text-white text-3xl underline">{{ $type }}</h1>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-10 md:gap-x-40 gap-y-20 justify-center pt-20 md:pt-20 pb-20">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-10 md:gap-x-40 gap-y-20 justify-center pt-16 md:pt-20 pb-10 md:pb-20">
             @foreach($items as $menu)
                 <div class="relative max-w-sm md:w-64 flex flex-col justify-center p-2 md:p-2 bg-[#D9E3DD] border border-gray-200 rounded-b-lg shadow-sm rounded-lg">
                     
@@ -71,8 +71,32 @@
             @endforeach
         </div>
     @endforeach
-
-
 </div>
+
+@push('scripts')
+   @if(session('success'))
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script>
+      document.addEventListener('DOMContentLoaded', function () {
+         const Toast = Swal.mixin({
+               toast: true,
+               position: 'top-end',
+               showConfirmButton: false,
+               timer: 4000,
+               timerProgressBar: false,
+               didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+               }
+         });
+
+         Toast.fire({
+               icon: 'success',
+               title: '{{ session('success') }}',
+         });
+      });
+   </script>
+   @endif
+@endpush
 
 @endsection

@@ -37,6 +37,7 @@ Route::get('/menu', [MenuController::class, 'index'])->name('customer.menu');
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('customer.about-us');
 Route::get('/cart', [CartController::class, 'index'])->name('customer.cart');
 Route::get('/detail-item/{id_menu}', [DetailItemController::class, 'index'])->name('customer.detail-item');
+Route::post('/detail-item/{id_menu}/add-cart', [DetailItemController::class, 'addToCart'])->name('customer.detail-item.add-cart');
 
 // ROLE CASHIER
 Route::middleware('role:cashier')->group(function () {

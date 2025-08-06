@@ -28,6 +28,7 @@
         @include('customer.partials.navbar')
         @yield('container')
         @include('customer.partials.footer')
+        @stack('scripts')
         <script type="module" src="{{ asset('resources/js/app.js') }}"></script> 
         <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 
