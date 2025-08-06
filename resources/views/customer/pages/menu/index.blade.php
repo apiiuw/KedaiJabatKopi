@@ -26,149 +26,46 @@
         <a href="#" class="flex flex-col justify-end h-28 md:hover:text-white items-center transition duration-300 ease-in-out">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-[38px]" viewBox="0 -960 960 960" fill="currentColor">
                 <path d="M533-440q-32-45-84.5-62.5T340-520q-56 0-108.5 17.5T147-440h386ZM40-360q0-109 91-174.5T340-600q118 0 209 65.5T640-360H40Zm0 160v-80h600v80H40ZM720-40v-80h56l56-560H450l-10-80h200v-160h80v160h200L854-98q-3 25-22 41.5T788-40h-68Zm0-80h56-56ZM80-40q-17 0-28.5-11.5T40-80v-40h600v40q0 17-11.5 28.5T600-40H80Zm260-400Z"/>
-            </svg>                
+            </svg>                 
             <p class="text-lg md:text-2xl mt-1">All Menus</p>
         </a>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-x-10 md:gap-x-40 gap-y-20 justify-center pt-20 md:pt-28 pb-28">
-        {{-- Looping 1 --}}
-        <div class="relative max-w-sm md:w-56 flex flex-col justify-center p-2 md:p-2 bg-[#D9E3DD] border border-gray-200 rounded-b-lg shadow-sm rounded-lg">
-
-            <div class="flex justify-center items-center">
-                <img src="{{ asset('img/home/special-menu-coffe-latte.jpg') }}" class="absolute w-28 h-28 md:w-36 md:h-36 rounded-full border-4 md:border-4 border-greenJagat object-cover -mt-16 top-4 -left-8" alt="The Drink">
-                <h1 class="font-semibold pl-20 text-sm md:text-2xl">Coffee<br>Latte</h1>
-            </div>
-
-            <p class="mt-8 text-sm md:text-2xl text-center leading-relaxed">
-                experience the<br>
-                exquisite coffee 
-            </p>
-
-            <div class="flex justify-between items-center mb-4 mt-5 px-2">
-                <p class="text-sm md:text-2xl text-center">
-                    Rp 35.000
-                </p>
-                <a href="#" class="w-10 md:w-10 h-10 md:h-10 bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
-                    <img src="{{ asset('img/icon/icon-cart.png') }}" class="h-8" alt="Icon Jagat Kopi" />
-                </a>
-            </div>
-        </div>
-
-        {{-- Looping 2 --}}
-        <div class="relative max-w-sm md:w-56 flex flex-col justify-center p-2 md:p-2 bg-[#D9E3DD] border border-gray-200 rounded-b-lg shadow-sm rounded-lg">
-
-            <div class="flex justify-center items-center">
-                <img src="{{ asset('img/home/special-menu-coffe-latte.jpg') }}" class="absolute w-28 h-28 md:w-36 md:h-36 rounded-full border-4 md:border-4 border-greenJagat object-cover -mt-16 top-4 -left-8" alt="The Drink">
-                <h1 class="font-semibold pl-20 text-sm md:text-2xl">Coffee<br>Latte</h1>
-            </div>
-
-            <p class="mt-8 text-sm md:text-2xl text-center leading-relaxed">
-                experience the<br>
-                exquisite coffee 
-            </p>
-
-            <div class="flex justify-between items-center mb-4 mt-5 px-2">
-                <p class="text-sm md:text-2xl text-center">
-                    Rp 35.000
-                </p>
-                <a href="#" class="w-10 md:w-10 h-10 md:h-10 bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
-                    <img src="{{ asset('img/icon/icon-cart.png') }}" class="h-8" alt="Icon Jagat Kopi" />
-                </a>
-            </div>
-        </div>
-
-        {{-- Looping 3 --}}
-        <div class="relative max-w-sm md:w-56 flex flex-col justify-center p-2 md:p-2 bg-[#D9E3DD] border border-gray-200 rounded-b-lg shadow-sm rounded-lg">
-
-            <div class="flex justify-center items-center">
-                <img src="{{ asset('img/home/special-menu-coffe-latte.jpg') }}" class="absolute w-28 h-28 md:w-36 md:h-36 rounded-full border-4 md:border-4 border-greenJagat object-cover -mt-16 top-4 -left-8" alt="The Drink">
-                <h1 class="font-semibold pl-20 text-sm md:text-2xl">Coffee<br>Latte</h1>
-            </div>
-
-            <p class="mt-8 text-sm md:text-2xl text-center leading-relaxed">
-                experience the<br>
-                exquisite coffee 
-            </p>
-
-            <div class="flex justify-between items-center px-2">
-                <p class="text-sm md:text-2xl text-center mt-4 mb-2">
-                    Rp 35.000
-                </p>
-                <a href="#" class="w-10 md:w-10 h-10 md:h-10 bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
-                    <img src="{{ asset('img/icon/icon-cart.png') }}" class="h-8" alt="Icon Jagat Kopi" />
-                </a>
-            </div>
-        </div>
-
-        {{-- Looping 4 --}}
-        <div class="relative max-w-sm md:w-56 flex flex-col justify-center p-2 md:p-2 bg-[#D9E3DD] border border-gray-200 rounded-b-lg shadow-sm rounded-lg">
-
-            <div class="flex justify-center items-center">
-                <img src="{{ asset('img/home/special-menu-coffe-latte.jpg') }}" class="absolute w-28 h-28 md:w-36 md:h-36 rounded-full border-4 md:border-4 border-greenJagat object-cover -mt-16 top-4 -left-8" alt="The Drink">
-                <h1 class="font-semibold pl-20 text-sm md:text-2xl">Coffee<br>Latte</h1>
-            </div>
-
-            <p class="mt-8 text-sm md:text-2xl text-center leading-relaxed">
-                experience the<br>
-                exquisite coffee 
-            </p>
-
-            <div class="flex justify-between items-center px-2">
-                <p class="text-sm md:text-2xl text-center mt-4 mb-2">
-                    Rp 35.000
-                </p>
-                <a href="#" class="w-10 md:w-10 h-10 md:h-10 bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
-                    <img src="{{ asset('img/icon/icon-cart.png') }}" class="h-8" alt="Icon Jagat Kopi" />
-                </a>
-            </div>
-        </div>
-
-        {{-- Looping 5 --}}
-        <div class="relative max-w-sm md:w-56 flex flex-col justify-center p-2 md:p-2 bg-[#D9E3DD] border border-gray-200 rounded-b-lg shadow-sm rounded-lg">
-
-            <div class="flex justify-center items-center">
-                <img src="{{ asset('img/home/special-menu-coffe-latte.jpg') }}" class="absolute w-28 h-28 md:w-36 md:h-36 rounded-full border-4 md:border-4 border-greenJagat object-cover -mt-16 top-4 -left-8" alt="The Drink">
-                <h1 class="font-semibold pl-20 text-sm md:text-2xl">Coffee<br>Latte</h1>
-            </div>
-
-            <p class="mt-8 text-sm md:text-2xl text-center leading-relaxed">
-                experience the<br>
-                exquisite coffee 
-            </p>
-
-            <div class="flex justify-between items-center px-2">
-                <p class="text-sm md:text-2xl text-center mt-4 mb-2">
-                    Rp 35.000
-                </p>
-                <a href="#" class="w-10 md:w-10 h-10 md:h-10 bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
-                    <img src="{{ asset('img/icon/icon-cart.png') }}" class="h-8" alt="Icon Jagat Kopi" />
-                </a>
-            </div>
-        </div>
-        {{-- Looping 6 --}}
-        <div class="relative max-w-sm md:w-56 flex flex-col justify-center p-2 md:p-2 bg-[#D9E3DD] border border-gray-200 rounded-b-lg shadow-sm rounded-lg">
-
-            <div class="flex justify-center items-center">
-                <img src="{{ asset('img/home/special-menu-coffe-latte.jpg') }}" class="absolute w-28 h-28 md:w-36 md:h-36 rounded-full border-4 md:border-4 border-greenJagat object-cover -mt-16 top-4 -left-8" alt="The Drink">
-                <h1 class="font-semibold pl-20 text-sm md:text-2xl">Coffee<br>Latte</h1>
-            </div>
-
-            <p class="mt-8 text-sm md:text-2xl text-center leading-relaxed">
-                experience the<br>
-                exquisite coffee 
-            </p>
-
-            <div class="flex justify-between items-center px-2">
-                <p class="text-sm md:text-2xl text-center mt-4 mb-2">
-                    Rp 35.000
-                </p>
-                <a href="#" class="w-10 md:w-10 h-10 md:h-10 bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
-                    <img src="{{ asset('img/icon/icon-cart.png') }}" class="h-8" alt="Icon Jagat Kopi" />
-                </a>
-            </div>
-        </div>
+    <div class="w-full flex justify-start items-start px-32 pt-16">
+        <h1 class="font-calistoga text-white text-3xl underline">Non-Coffee</h1>
     </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-x-10 md:gap-x-40 gap-y-20 justify-center pt-20 md:pt-20 pb-28">
+        @foreach($menus as $menu)
+            <div class="relative max-w-sm md:w-64 flex flex-col justify-center p-2 md:p-2 bg-[#D9E3DD] border border-gray-200 rounded-b-lg shadow-sm rounded-lg">
+                
+                <div class="flex justify-center items-center">
+                    <img src="{{ asset($menu->picture) }}" 
+                        class="absolute w-28 h-28 md:w-36 md:h-36 rounded-full border-4 md:border-4 border-greenJagat object-cover -mt-16 top-4 -left-8" 
+                        alt="{{ $menu->product_name }}">
+                    <h1 class="font-semibold pl-20 md:pl-28 text-sm md:text-2xl">
+                        {{ $menu->product_name }}
+                    </h1>
+                </div>
+
+                <p class="mt-8 text-sm md:text-2xl text-center leading-relaxed">
+                    {{ $menu->description ?? 'No description available' }}
+                </p>
+
+                <div class="flex justify-between items-center mb-4 mt-5 px-2">
+                    <p class="text-sm md:text-2xl text-center">
+                        Rp {{ number_format($menu->price, 0, ',', '.') }}
+                    </p>
+                    <a href="#" 
+                    class="w-10 md:w-10 h-10 md:h-10 bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 -960 960 960" width="25px" fill="currentColor">
+                            <path d="M360-640v-80h240v80H360ZM280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM40-800v-80h131l170 360h280l156-280h91L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68.5-39t-1.5-79l54-98-144-304H40Z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
 </div>
 
 @endsection

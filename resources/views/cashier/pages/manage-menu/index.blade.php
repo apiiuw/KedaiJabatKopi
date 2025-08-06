@@ -55,6 +55,7 @@
                   <th scope="col" class="px-6 py-3">ID Menu</th>
                   <th scope="col" class="px-6 py-3">Product name</th>
                   <th scope="col" class="px-6 py-3">Category</th>
+                  <th scope="col" class="px-6 py-3">Iced/Hot</th>
                   <th scope="col" class="px-6 py-3">Sweetness</th>
                   <th scope="col" class="px-6 py-3">Espresso</th>
                   <th scope="col" class="px-6 py-3">Price</th>
@@ -74,8 +75,17 @@
                         {{-- Category --}}
                         <td class="px-6 py-4">{{ $menu->category }}</td>
 
+                        {{-- ICED/HOT --}}
+                        <td class="px-6 py-4 whitespace-nowrap text-center">
+                           @if($menu->iced_hot == 1)
+                              <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">Active</span>
+                           @else
+                              <span class="bg-red-100 text-red-800 text-sm font-medium px-2.5 py-0.5 rounded">Non Active</span>
+                           @endif
+                        </td>
+
                         {{-- Sweetness --}}
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 whitespace-nowrap text-center">
                            @if($menu->sweetness == 1)
                               <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">Active</span>
                            @else
@@ -84,7 +94,7 @@
                         </td>
 
                         {{-- Espresso --}}
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 whitespace-nowrap text-center">
                            @if($menu->espresso == 1)
                               <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">Active</span>
                            @else

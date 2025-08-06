@@ -54,7 +54,8 @@ class ManageMenuController extends Controller
             ? $request->custom_type
             : $validated['type'];
 
-        // Checkbox Sweetness & Espresso
+        // Checkbox Iced/Hot, Sweetness & Espresso
+        $validated['iced_hot'] = $request->has('iced_hot') ? 1 : 0;
         $validated['sweetness'] = $request->has('sweetness') ? 1 : 0;
         $validated['espresso'] = $request->has('espresso') ? 1 : 0;
 
@@ -135,6 +136,7 @@ class ManageMenuController extends Controller
             : $validated['type'];
 
         // Checkbox
+        $validated['iced_hot'] = $request->has('iced_hot') ? 1 : 0;
         $validated['sweetness'] = $request->has('sweetness') ? 1 : 0;
         $validated['espresso'] = $request->has('espresso') ? 1 : 0;
 

@@ -6,7 +6,7 @@
         {{-- Header --}}
         <div class="flex items-center mb-6">
             <a href="javascript:history.back()" class="flex justify-center">
-                <i class="fa-solid fa-circle-chevron-left fa-xl text-greenJagat hover:text-darkGreenJagat transition duration-500 ease-in-out"></i>
+                <i class="fa-solid fa-chevron-left fa-xl text-greenJagat hover:text-darkGreenJagat transition duration-500 ease-in-out"></i>
             </a>
             <h1 class="font-calistoga text-greenJagat text-3xl ms-3">Manage Menu | Add Menu</h1>
         </div>
@@ -54,6 +54,10 @@
                 {{-- Add Ons --}}
                 <div id="addons-section">
                     <h1 class="font-semibold block text-greenJagat mb-1">Add Ons</h1>
+                    <div class="flex items-center space-x-3">
+                        <input type="checkbox" name="iced_hot" id="iced_hot" class="w-5 h-5 text-greenJagat focus:ring-greenJagat border-gray-300 rounded">
+                        <label for="iced_hot" class="text-greenJagat font-medium">Iced/Hot Available</label>
+                    </div>
                     <div class="flex items-center space-x-3">
                         <input type="checkbox" name="sweetness" id="sweetness" class="w-5 h-5 text-greenJagat focus:ring-greenJagat border-gray-300 rounded">
                         <label for="sweetness" class="text-greenJagat font-medium">Sweetness Available</label>

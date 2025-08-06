@@ -15,6 +15,7 @@ class Menu extends Model
         'description',
         'category',
         'type',
+        'iced_hot',
         'sweetness',
         'espresso',
         'availability',

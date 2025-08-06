@@ -101,7 +101,7 @@
     </div>
 
     <!-- Modal Quantity -->
-    <div x-show="showModal" class="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
+    {{-- <div x-show="showModal" class="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
         <div class="bg-white p-6 rounded shadow-lg w-80 text-center font-mono">
         <h3 class="text-lg font-bold mb-4">Edit Quantity</h3>
         <p class="mb-2 text-sm text-gray-700" x-text="'Item: ' + selectedItem"></p>
@@ -119,7 +119,7 @@
             </button>
         </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 @endsection
