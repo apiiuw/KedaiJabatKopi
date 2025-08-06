@@ -1,65 +1,77 @@
 @extends('customer.layouts.main')
 @section('container')
 
-<div class="min-h-screen flex justify-center items-center" x-data="{ showModal: false, selectedQty: 1, selectedItem: null }">
-    <div class="bg-darkGreenJagat flex flex-col justify-center items-center min-h-screen h-full pt-24 px-6 py-10 w-full max-w-md md:w-[380px] shadow-md p-6 text-sm clip-path-[polygon(0_0,100%_0,100%_96%,96%_100%,0_100%)] overflow-hidden">
+<div class="min-h-screen flex justify-center items-center" x-data="{ showModal: false, selectedQty: 1, selectedItem: null, selectedId: null }">
+    <div class="bg-darkGreenJagat flex flex-col md:flex-row md:gap-x-20 justify-center items-center min-h-screen h-full pt-24 px-6 py-10 w-full max-w-md md:max-w-full md:w-full shadow-md p-6 text-sm clip-path-[polygon(0_0,100%_0,100%_96%,96%_100%,0_100%)] overflow-hidden">
 
         <!-- Invoice -->
-        <div class="relative bg-white w-full max-w-md shadow-md p-6 border border-gray-300 font-mono text-sm clip-path-[polygon(0_0,100%_0,100%_96%,96%_100%,0_100%)] rounded-md overflow-hidden">
+        <div class="relative bg-white w-full max-w-md md:max-w-xl shadow-md p-6 border border-gray-300 font-mono text-sm clip-path-[polygon(0_0,100%_0,100%_96%,96%_100%,0_100%)] rounded-md overflow-hidden">
             <h2 class="text-center text-xl font-bold mb-4">Your Cart</h2>
             
             <div class="border-t border-dashed mb-2"></div>
 
             <!-- Header -->
-            <div class="grid grid-cols-[2fr_1fr_0.7fr_1fr_0.5fr] font-bold mb-2">
+            <div class="grid grid-cols-[2fr_1fr_0.7fr_1fr_1fr_0.5fr] font-bold mb-2">
                 <span>Item</span>
                 <span class="text-right">Price</span>
                 <span class="text-center">Qty</span>
                 <span class="text-right">Total</span>
                 <span></span>
+                <span></span>
             </div>
 
             <div class="border-t border-dashed mb-2"></div>
 
-            <!-- Item 1 -->
-            <div class="grid grid-cols-[2fr_1fr_0.7fr_1fr_0.5fr] items-center">
-                <span>Kopi Latte</span>
-                <span class="text-right">35.000</span>
-                <span class="text-center">
-                    <button class="text-greenJagat hover:underline" @click="selectedQty = 1; selectedItem = 'Kopi Latte'; showModal = true">1</button>
-                </span>
-                <span class="text-right">35.000</span>
-                <span class="text-right">
-                    <button class="text-red-500 hover:text-red-700">
-                    <i class="fas fa-trash"></i>
-                    </button>
-                </span>
-            </div>
-            <div class="text-gray-500 italic text-xs mb-2 ml-1">Ice, Less Sugar, 1shot</div>
-
-            <!-- Item 2 -->
-            <div class="grid grid-cols-[2fr_1fr_0.7fr_1fr_0.5fr] items-center">
-                <span>Kopi Hitam</span>
-                <span class="text-right">25.000</span>
-                <span class="text-center">
-                    <button class="text-greenJagat hover:underline" @click="selectedQty = 2; selectedItem = 'Kopi Hitam'; showModal = true">2</button>
-                </span>
-                <span class="text-right">50.000</span>
-                <span class="text-right">
-                    <button class="text-red-500 hover:text-red-700">
-                    <i class="fas fa-trash"></i>
-                    </button>
-                </span>
-            </div>
-            <div class="text-gray-500 italic text-xs mb-2 ml-1">Hot, Normal Sugar</div>
+            @foreach($carts as $cart)
+                <div class="grid grid-cols-[2fr_1fr_0.7fr_1fr_1fr_0.5fr] items-center">
+                    <span>{{ $cart->menu->product_name }}</span>
+                    <span class="text-right">Rp {{ number_format($cart->menu->price, 0, ',', '.') }}</span>
+                    <span class="text-center">
+                        <button
+                            class="text-greenJagat hover:underline"
+                            @click="
+                                selectedQty = {{ $cart->quantity }};
+                                selectedItem = '{{ $cart->menu->product_name }}';
+                                selectedId = {{ $cart->id }};
+                                showModal = true;
+                            "
+                        >
+                            {{ $cart->quantity }}
+                        </button>
+                    </span>
+                    <span class="text-right">
+                        Rp {{ number_format($cart->price, 0, ',', '.') }}
+                    </span>
+                    <span class="text-right">
+                        <a href="{{ route('customer.cart.edit', $cart->id) }}" class="text-greenJagat hover:underline">
+                            Edit
+                        </a>
+                    </span>
+                    <span class="text-right">
+                        <form action="{{ route('customer.cart.delete', $cart->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:text-red-700">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </span>
+                </div>
+                @if($cart->description)
+                    <div class="text-gray-500 italic text-xs mb-2 ml-1">
+                        {{ $cart->description }}
+                    </div>
+                @endif
+            @endforeach
 
             <div class="border-t border-dashed my-4"></div>
 
             <!-- Total -->
             <div class="flex justify-between font-bold text-base">
-            <span>Amount</span>
-            <span>Rp 85.000</span>
+                <span>Amount</span>
+                <span>Rp {{ number_format($totalPrice, 0, ',', '.') }}</span>
             </div>
+
 
             <p class="text-xs text-center mt-6">Hit checkout and sip happiness ☕</p>
 
@@ -101,25 +113,60 @@
     </div>
 
     <!-- Modal Quantity -->
-    {{-- <div x-show="showModal" class="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
+    <div x-show="showModal" class="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50"
+        x-cloak>
         <div class="bg-white p-6 rounded shadow-lg w-80 text-center font-mono">
-        <h3 class="text-lg font-bold mb-4">Edit Quantity</h3>
-        <p class="mb-2 text-sm text-gray-700" x-text="'Item: ' + selectedItem"></p>
-        <input type="number" x-model="selectedQty" min="1"
-                class="no-spinner appearance-none w-20 border border-gray-300 rounded text-center text-lg mb-4">
+            <h3 class="text-lg font-bold mb-4">Edit Quantity</h3>
+            <p class="mb-2 text-sm text-gray-700" x-text="'Item: ' + selectedItem"></p>
 
-        <div class="flex justify-center gap-4">
-            <button class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700"
-                    @click="showModal = false">
-            Save
-            </button>
-            <button class="bg-gray-300 px-4 py-1 rounded hover:bg-gray-400"
-                    @click="showModal = false">
-            Cancel
-            </button>
+            <form method="POST" :action="'/cart/update-qty/' + selectedId">
+                @csrf
+                @method('PUT')
+                <input type="number" name="quantity" x-model="selectedQty" min="1"
+                    class="no-spinner appearance-none w-20 border border-gray-300 rounded text-center text-lg mb-4">
+
+                <div class="flex justify-center gap-4">
+                    <button type="submit"
+                            class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700">
+                        Save
+                    </button>
+                    <button type="button"
+                            class="bg-gray-300 px-4 py-1 rounded hover:bg-gray-400"
+                            @click="showModal = false">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+
         </div>
-        </div>
-    </div> --}}
+    </div>
+
 </div>
+
+@push('scripts')
+   @if(session('success'))
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script>
+      document.addEventListener('DOMContentLoaded', function () {
+         const Toast = Swal.mixin({
+               toast: true,
+               position: 'top-end',
+               showConfirmButton: false,
+               timer: 4000,
+               timerProgressBar: false,
+               didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+               }
+         });
+
+         Toast.fire({
+               icon: 'success',
+               title: '{{ session('success') }}',
+         });
+      });
+   </script>
+   @endif
+@endpush
 
 @endsection

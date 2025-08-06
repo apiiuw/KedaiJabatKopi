@@ -35,9 +35,15 @@ Route::get('/auth/sign-out', [AuthController::class, 'signOut'])->name('auth.sig
 Route::get('/', [HomeController::class, 'index'])->name('customer.home');
 Route::get('/menu', [MenuController::class, 'index'])->name('customer.menu');
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('customer.about-us');
-Route::get('/cart', [CartController::class, 'index'])->name('customer.cart');
+
 Route::get('/detail-item/{id_menu}', [DetailItemController::class, 'index'])->name('customer.detail-item');
 Route::post('/detail-item/{id_menu}/add-cart', [DetailItemController::class, 'addToCart'])->name('customer.detail-item.add-cart');
+
+Route::get('/cart', [CartController::class, 'index'])->name('customer.cart');
+Route::get('/cart/edit/{id}', [CartController::class, 'edit'])->name('customer.cart.edit');
+Route::put('/cart/update/{id}', [CartController::class, 'updateForm'])->name('customer.cart.updateForm');
+Route::delete('/cart/{id}/delete', [CartController::class, 'destroy'])->name('customer.cart.delete');
+Route::put('/cart/update-qty/{id}', [CartController::class, 'updateQty'])->name('customer.cart.updateQty');
 
 // ROLE CASHIER
 Route::middleware('role:cashier')->group(function () {
