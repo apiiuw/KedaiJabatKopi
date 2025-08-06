@@ -70,8 +70,9 @@
 
           <!-- Submenu -->
           <ul id="submenu" class="absolute left-0 mt-2 md:mt-[1.6rem] hidden text-black md:text-white w-full md:w-40 z-50 bg-white md:bg-greenJagat/70 md:backdrop-blur-md">
-            <li><a href="{{ route('customer.menu') }}" class="{{ request()->is('menu') ? 'md:underline bg-greenJagat text-white' : '' }} block px-4 py-2 md:hover:text-gray-300 md:text-white transition duration-300 ease-in-out">The Drink</a></li>
-            <li><a href="#noncoffee" class="block px-4 py-2 md:hover:text-gray-300 transition duration-300 ease-in-out">The Food</a></li>
+            <li><a href="/menu?category=Drink" class="{{ request()->is('/menu?category=Drink') ? 'md:underline bg-greenJagat text-white' : '' }} block px-4 py-2 md:hover:text-gray-300 md:text-white transition duration-300 ease-in-out">The Drink</a></li>
+            <li><a href="/menu?category=Food" class="{{ request()->is('/menu?category=Food') ? 'md:underline bg-greenJagat text-white' : '' }} block px-4 py-2 md:hover:text-gray-300 md:text-white transition duration-300 ease-in-out">The Food</a></li>
+            <li><a href="/menu?category=all" class="{{ request()->is('/menu?category=all') ? 'md:underline bg-greenJagat text-white' : '' }} block px-4 py-2 md:hover:text-gray-300 md:text-white transition duration-300 ease-in-out">All Menu</a></li>
           </ul>
         </li>
           <a href="{{ route('customer.about-us') }}" class="{{ request()->is('about-us') ? 'md:underline bg-greenJagat text-white' : 'md:hover:text-gray-300' }} block py-2 px-3 rounded-sm md:hover:bg-transparent md:bg-transparent md:text-white transition duration-500 ease-in-out md:p-0">About Us</a>

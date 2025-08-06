@@ -8,11 +8,20 @@ use App\Models\Menu;
 
 class MenuController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $title = 'Menu'; 
-        $menus = Menu::all();
+        $title = 'Menu';
+        $category = $request->get('category'); 
 
-        return view('customer.pages.menu.index', compact('title', 'menus'));
+        if ($category && $category !== 'all') {
+            $menus = Menu::where('category', $category)
+                ->orderBy('type')
+                ->get()
+                ->groupBy('type');
+        } else {
+            $menus = Menu::orderBy('type')->get()->groupBy('type');
+        }
+
+        return view('customer.pages.menu.index', compact('title', 'menus', 'category'));
     }
 }
