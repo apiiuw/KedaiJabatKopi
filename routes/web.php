@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Midtrans\PaymentController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\MenuController;
 use App\Http\Controllers\Customer\AboutUsController;
@@ -44,6 +45,10 @@ Route::get('/cart/edit/{id}', [CartController::class, 'edit'])->name('customer.c
 Route::put('/cart/update/{id}', [CartController::class, 'updateForm'])->name('customer.cart.updateForm');
 Route::delete('/cart/{id}/delete', [CartController::class, 'destroy'])->name('customer.cart.delete');
 Route::put('/cart/update-qty/{id}', [CartController::class, 'updateQty'])->name('customer.cart.updateQty');
+
+Route::post('/checkout', [PaymentController::class, 'checkout'])->name('customer.checkout');
+Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->name('customer.payment.success');
+
 
 // ROLE CASHIER
 Route::middleware('role:cashier')->group(function () {

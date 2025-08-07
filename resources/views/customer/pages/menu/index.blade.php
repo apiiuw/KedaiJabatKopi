@@ -1,7 +1,7 @@
 @extends('customer.layouts.main')
 @section('container')
 
-<div class="h-full flex flex-col items-center pt-28 md:pt-36 px-8">
+<div class="h-full min-h-screen flex flex-col items-center pt-28 md:pt-36 px-8">
     <div class="relative w-full md:w-1/4">
         <input type="text" id="search-navbar"
             class="block w-full h-auto md:h-9 px-2 ps-3 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 md:bg-white/5 md:text-white placeholder:text-white/70"
@@ -47,12 +47,12 @@
                         <img src="{{ asset($menu->picture) }}" 
                             class="absolute w-28 h-28 md:w-36 md:h-36 rounded-full border-4 md:border-4 border-greenJagat object-cover -mt-16 top-4 -left-8" 
                             alt="{{ $menu->product_name }}">
-                        <h1 class="font-semibold pl-20 md:pl-28 text-sm md:text-2xl">
+                        <h1 class="font-semibold pl-20 md:pl-28 h-10 md:h-20 flex justify-center items-center text-sm md:text-2xl">
                             {{ $menu->product_name }}
                         </h1>
                     </div>
 
-                    <p class="mt-8 text-sm md:text-2xl text-center leading-relaxed">
+                    <p class="mt-8 px-0 md:px-4 text-sm md:text-xl text-left leading-relaxed">
                         {{ $menu->description ?? 'No description available' }}
                     </p>
 

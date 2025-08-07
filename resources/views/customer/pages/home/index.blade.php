@@ -159,4 +159,19 @@
     
 </div>
 
+@push('scripts')
+    @if(session('message'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                icon: "{{ session('status') === 'success' ? 'success' : (session('status') === 'error' ? 'error' : 'info') }}",
+                title: "{{ ucfirst(session('status')) }}",
+                text: "{{ session('message') }}",
+                // confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
+@endpush
+
+
 @endsection

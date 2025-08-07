@@ -15,13 +15,18 @@ class MenuController extends Controller
 
         if ($category && $category !== 'all') {
             $menus = Menu::where('category', $category)
+                ->where('availability', 'available') // hanya menu yang tersedia
                 ->orderBy('type')
                 ->get()
                 ->groupBy('type');
         } else {
-            $menus = Menu::orderBy('type')->get()->groupBy('type');
+            $menus = Menu::where('availability', 'available') // hanya menu yang tersedia
+                ->orderBy('type')
+                ->get()
+                ->groupBy('type');
         }
 
         return view('customer.pages.menu.index', compact('title', 'menus', 'category'));
     }
+
 }

@@ -22,4 +22,10 @@ class Menu extends Model
         'price',
         'picture',
     ];
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'id_menu');
+    }
+
 }
