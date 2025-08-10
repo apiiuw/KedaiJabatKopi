@@ -40,8 +40,8 @@
          <li>
             <a href="{{ route('cashier.order') }}" class="{{ request()->is('cashier/order') ? 'bg-greenJagat text-white' : 'hover:bg-lightGreenJagat' }} flex items-center p-2 text-greenJagat rounded-lg group transition duration-500 ease-in-out">
                <i class="fa-solid fa-cart-shopping fa-lg shrink-0 text-greenJagat transition duration-500 ease-in-out {{ request()->is('cashier/order') ? 'text-white' : '' }}"></i>
-               <span class="flex-1 ms-3 whitespace-nowrap">Order</span>
-               <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-darkGreenJagat bg-[#9FB9A9]/70 rounded-full">3</span>
+               <span class="flex-1 ms-3 whitespace-nowrap">Today's Order</span>
+               <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-darkGreenJagat bg-[#9FB9A9]/70 rounded-full">{{ $countPaid }}</span>
             </a>
          </li>
          <li>

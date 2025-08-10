@@ -53,7 +53,12 @@ Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->na
 // ROLE CASHIER
 Route::middleware('role:cashier')->group(function () {
     Route::get('/cashier/dashboard', [DashboardController::class, 'index'])->name('cashier.dashboard');
+
+    // Today's Order
     Route::get('/cashier/order', [OrderController::class, 'index'])->name('cashier.order');
+    Route::post('cashier/order/{id_order}/process', [OrderController::class, 'process'])->name('orders.process');
+
+    // Past Order
     Route::get('/cashier/past-order', [PastOrderController::class, 'index'])->name('cashier.past-order');
 
     // Manage Menu
