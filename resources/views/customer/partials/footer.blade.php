@@ -10,7 +10,7 @@
                   <hr class="mb-6">
                   <ul class="text-white font-medium">
                       <li class="mb-4">
-                          <a href="https://flowbite.com/" class="hover:underline transition duration-500 ease-in-out">Jl. Arya Wangsakara No.2,<br>Bugel, Kec. Karawaci,<br>Kota Tangerang, Banten</a>
+                          <a href="https://maps.app.goo.gl/cWAxwo5Xk8ungJPe8" class="hover:underline transition duration-500 ease-in-out">Jl. Arya Wangsakara No.2,<br>Bugel, Kec. Karawaci,<br>Kota Tangerang, Banten</a>
                       </li>
                   </ul>
               </div>

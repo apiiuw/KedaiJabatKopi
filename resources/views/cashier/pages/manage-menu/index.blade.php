@@ -65,9 +65,14 @@
                         class="border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-greenJagat outline-none text-greenJagat">
                   <option value="" {{ request('availability')==='' ? 'selected' : '' }}>All Availability</option>
                   <option value="available"   {{ request('availability')==='available'   ? 'selected' : '' }}>Available</option>
-                  <option value="unavailable" {{ request('availability')==='unavailable' ? 'selected' : '' }}>Unavailable</option>
+                  <option value="not available" {{ request('availability')==='not available' ? 'selected' : '' }}>Not Unavailable</option>
                </select>
             </div>
+
+            <a href="{{ url()->current() }}"
+               class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md transition duration-500 ease-in-out">
+                  Reset
+            </a>
 
             {{-- Add Menu --}}
             <a href="{{ route('cashier.manage-menu.add') }}"
@@ -172,8 +177,9 @@
 
 @push('scripts')
 
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
    @if($isFiltered || $isSorted)
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script>
          document.addEventListener('DOMContentLoaded', function () {
          const Toast = Swal.mixin({
@@ -225,7 +231,6 @@
 
 
    @if(session('success'))
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    <script>
       document.addEventListener('DOMContentLoaded', function () {
          const Toast = Swal.mixin({
@@ -247,6 +252,7 @@
       });
    </script>
    @endif
+
 @endpush
 
 

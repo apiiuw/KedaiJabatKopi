@@ -14,10 +14,10 @@
                 senses and start your day right.
             </p>
             <div class="flex justify-start gap-x-2 text-base md:text-xl">
-                <a href="#" class="bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-black text-center px-6 rounded-md flex items-center py-2">
+                <a href="{{ route('customer.about-us') }}" class="bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-black text-center px-6 rounded-md flex items-center py-2">
                     Explore More
                 </a>
-                <a href="#" class="bg-transparent hover:bg-darkGreenJagat transition duration-500 ease-in-out text-white border border-white text-center px-6 py-0 rounded-md flex items-center">
+                <a href="/menu?category=all" class="bg-transparent hover:bg-darkGreenJagat transition duration-500 ease-in-out text-white border border-white text-center px-6 py-0 rounded-md flex items-center">
                     Order Now<span class="ml-3"><img src="{{ asset('img/icon/icon-arrow-right.png') }}" class="h-6 md:h-8" alt="icon arrow right"></span>
                 </a>
             </div>
@@ -43,7 +43,7 @@
             <div class="max-w-sm flex flex-col justify-center p-4 md:p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
                 <h5 class="mb-2 text-xl md:text-4xl tracking-tight text-greenJagat font-calistoga">The Drink</h5>
                 <img src="{{ asset('img/home/the-drink.jpg') }}" class=" w-48 h-48 md:w-80 md:h-80 rounded-xl object-cover" alt="The Drink">
-                <a href="#" class="mt-3 md:mt-5 px-6 py-2 text-sm md:text-lg font-medium text-center text-white bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out rounded-lg w-fit">
+                <a href="/menu?category=Drink" class="mt-3 md:mt-5 px-6 py-2 text-sm md:text-lg font-medium text-center text-white bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out rounded-lg w-fit">
                     Find your drink here!
                 </a>
             </div>
@@ -51,7 +51,7 @@
             <div class="max-w-sm flex flex-col justify-center p-4 md:p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
                 <h5 class="mb-2 text-xl md:text-4xl tracking-tight text-greenJagat font-calistoga">The Food</h5>
                 <img src="{{ asset('img/home/the-food.jpg') }}" class=" w-48 h-48 md:w-80 md:h-80 rounded-xl object-cover" alt="The Drink">
-                <a href="#" class="mt-3 md:mt-5 px-6 py-2 text-sm md:text-lg font-medium text-center text-white bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out rounded-lg w-fit">
+                <a href="/menu?category=Food" class="mt-3 md:mt-5 px-6 py-2 text-sm md:text-lg font-medium text-center text-white bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out rounded-lg w-fit">
                     Find your food here!
                 </a>
             </div>
@@ -75,7 +75,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-x-5 md:gap-x-10 gap-y-20 px-10 mt-16 md:mt-28">
 
             <div class="relative max-w-sm flex flex-col justify-center p-4 md:p-2 bg-white border border-gray-200 rounded-b-lg shadow-sm">
-                <a href="#" class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-greenJagat text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
+                <a href="/detail-item/MENU3685?category=Drink" class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-greenJagat text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
                     <i class="fa-solid fa-plus"></i>
                 </a>
 
@@ -88,7 +88,7 @@
             </div>
 
             <div class="relative max-w-sm flex flex-col justify-center p-4 md:p-2 bg-white border border-gray-200 rounded-b-lg shadow-sm">
-                <a href="#" class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-greenJagat text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
+                <a href="/detail-item/MENU8754?category=Drink" class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-greenJagat text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
                     <i class="fa-solid fa-plus"></i>
                 </a>
 
@@ -101,7 +101,7 @@
             </div>
 
             <div class="relative max-w-sm flex flex-col justify-center p-4 md:p-2 bg-white border border-gray-200 rounded-b-lg shadow-sm">
-                <a href="#" class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-greenJagat text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
+                <a href="/detail-item/MENU9531?category=Drink" class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-greenJagat text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
                     <i class="fa-solid fa-plus"></i>
                 </a>
 
@@ -114,14 +114,14 @@
             </div>
 
             <div class="relative max-w-sm flex flex-col justify-center p-4 md:p-2 bg-white border border-gray-200 rounded-b-lg shadow-sm">
-                <a href="#" class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-greenJagat text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
+                <a href="/detail-item/MENU1646?category=Drink" class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-greenJagat text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
                     <i class="fa-solid fa-plus"></i>
                 </a>
 
                 <img src="{{ asset('img/home/special-menu-matcha.jpg') }}" class="w-28 h-28 md:w-56 md:h-56 rounded-full border-4 md:border-8 border-greenJagat object-cover -mt-16 md:-mt-24" alt="The Drink">
 
                 <p class="text-sm md:text-2xl text-center mt-5 mb-2">
-                    Matcha<br>
+                    Matcha Latte<br>
                     Rp 30.000
                 </p>
             </div>
@@ -136,7 +136,7 @@
     </div>
 
     {{-- Section 4 --}}
-    <div class="flex flex-col-reverse md:grid md:grid-cols-2 md:justify-center items-center px-5 md:px-10 h-full pb-20 md:py-0 md:h-screen">
+    <div class="flex flex-col-reverse md:grid md:grid-cols-2 md:justify-center items-center px-5 md:px-10 h-full pb-20 md:py-0 md:mb-8 md:h-screen">
         <div class="flex flex-col justify-start text-white mt-10 md:mt-0">
             <h1 class="font-calistoga text-xl md:text-5xl mb-3 leading-snug text-[#628A71]">
                 Why Us? 
@@ -167,7 +167,8 @@
                 icon: "{{ session('status') === 'success' ? 'success' : (session('status') === 'error' ? 'error' : 'info') }}",
                 title: "{{ ucfirst(session('status')) }}",
                 text: "{{ session('message') }}",
-                // confirmButtonText: 'OK'
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#2E6342',
             });
         </script>
     @endif

@@ -46,7 +46,7 @@
             </li>
             <li>
                <a href="{{ route('cashier.past-order') }}" class="{{ request()->is('cashier/past-order') ? 'bg-greenJagat text-white' : 'hover:bg-lightGreenJagat' }} flex items-center p-2 text-greenJagat rounded-lg group transition duration-500 ease-in-out">
-                  <i class="fa-solid fa-cart-arrow-down fa-lg shrink-0 text-greenJagat transition duration-500 ease-in-out {{ request()->is('cashier/past-order') ? 'text-white' : '' }}"></i>
+                  <i class="fa-solid fa-clock-rotate-left fa-lg shrink-0 text-greenJagat transition duration-500 ease-in-out {{ request()->is('cashier/past-order') ? 'text-white' : '' }}"></i>
                   <span class="flex-1 ms-3 whitespace-nowrap">Past Order</span>
                </a>
             </li>
@@ -59,15 +59,15 @@
                      : 'hover:bg-lightGreenJagat' }} 
                      flex items-center p-2 text-greenJagat rounded-lg group transition duration-500 ease-in-out">
 
-                  <svg class="w-5 h-5 text-greenJagat transition duration-500 ease-in-out 
+                  <svg class="w-6 h-6 text-greenJagat transition duration-500 ease-in-out 
                      {{ request()->is('cashier/manage-menu') 
                            || request()->is('cashier/manage-menu/add-menu') 
                            || request()->is('cashier/manage-menu/edit-menu*') 
                            ? 'text-white' : '' }}" 
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" 
-                        viewBox="0 0 18 18">
-                     <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
-                  </svg>
+                        viewBox="0 -960 960 960">
+                     <path d="M533-440q-32-45-84.5-62.5T340-520q-56 0-108.5 17.5T147-440h386ZM40-360q0-109 91-174.5T340-600q118 0 209 65.5T640-360H40Zm0 160v-80h600v80H40ZM720-40v-80h56l56-560H450l-10-80h200v-160h80v160h200L854-98q-3 25-22 41.5T788-40h-68Zm0-80h56-56ZM80-40q-17 0-28.5-11.5T40-80v-40h600v40q0 17-11.5 28.5T600-40H80Zm260-400Z"/>
+                  </svg>     
 
                   <span class="flex-1 ms-3 whitespace-nowrap">Manage Menu</span>
                </a>

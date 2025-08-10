@@ -59,7 +59,7 @@
                   placeholder="Search ID Order/Name/Table..."
                   class="w-full border border-gray-300 rounded-l-md px-3 py-2">
             <button type="submit"
-                  class="px-4 bg-greenJagat hover:bg-darkGreenJagat text-white rounded-r-md transition flex items-center justify-center">
+                  class="px-4 bg-greenJagat hover:bg-darkGreenJagat text-white rounded-r-md flex items-center justify-center transition duration-500 ease-in-out">
             <i class="fa fa-search"></i>
             </button>
          </div>
@@ -78,11 +78,11 @@
             </div>
 
             <button type="submit"
-                  class="px-4 py-2 bg-greenJagat hover:bg-darkGreenJagat text-white rounded-md transition">
+                  class="px-4 py-2 bg-greenJagat hover:bg-darkGreenJagat text-white rounded-md transition duration-500 ease-in-out">
             Set Filter
             </button>
             <a href="{{ route('cashier.order') }}"
-               class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md transition">
+               class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md transition duration-500 ease-in-out">
             Reset
             </a>
          </div>

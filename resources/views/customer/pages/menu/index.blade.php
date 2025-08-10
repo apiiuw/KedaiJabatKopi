@@ -2,18 +2,22 @@
 @section('container')
 
 <div class="h-full min-h-screen flex flex-col items-center pt-28 md:pt-36 px-8">
-    <div class="relative w-full md:w-1/4">
-        <input type="text" id="search-navbar"
-            class="block w-full h-auto md:h-9 px-2 ps-3 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 md:bg-white/5 md:text-white placeholder:text-white/70"
-            placeholder="Search...">
+    <form action="{{ route('customer.menu') }}" method="GET" class="relative w-full md:w-1/4">
+        <input
+            type="text"
+            name="q"
+            id="search-navbar"
+            placeholder="Search..."
+            value="{{ request('q') }}"
+            class="block w-full h-auto md:h-9 px-2 ps-3 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 md:bg-white/5 md:text-white placeholder:text-white/70">
+        <input type="hidden" name="category" value="all">
         <div class="absolute inset-y-0 end-0 flex items-center pe-3 pointer-events-none">
-            <svg class="w-4 h-4 text-gray-500 md:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+            <svg class="w-4 h-4 text-gray-500 md:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
             </svg>
         </div>
-    </div>
+    </form>
     <div class="flex flex-row items-center gap-x-16 mt-0 md:mt-0 text-[#C4C2C2]">
         <a href="{{ route('customer.menu', ['category' => 'Drink']) }}" 
         class="flex flex-col justify-end h-28 {{ $category === 'Drink' ? 'text-white' : 'hover:text-white' }} items-center transition duration-300 ease-in-out">
@@ -34,46 +38,83 @@
         </a>
     </div>
 
-    @foreach($menus as $type => $items)
-        <div class="w-full flex justify-start items-start px-2 md:px-32 pt-5 md:pt-10">
-            <h1 class="font-calistoga text-white text-3xl underline">{{ $type }}</h1>
+    @if(collect($menus)->isEmpty())
+        <div class="w-full md:w-2/3 text-center text-white/90 py-16">
+            <h2 class="text-2xl md:text-3xl font-semibold">No results found</h2>
+            <p class="mt-3 text-lg">
+                We couldn’t find {{ request('q') ? '“'.e(request('q')).'”' : 'any menu items' }}.
+                Try a different keyword or browse all menus.
+            </p>
+            <a href="{{ route('customer.menu', ['category' => 'all']) }}"
+                class="inline-block mt-6 px-5 py-2 rounded-lg bg-greenJagat border hover:bg-darkGreenJagat transition text-white">
+                View All Menus
+            </a>
         </div>
+    @else
+        @foreach($menus as $type => $items)
+            <div class="w-full flex justify-start items-start px-2 md:px-32 pt-5 md:pt-10">
+                <h1 class="font-calistoga text-white text-3xl underline">{{ $type }}</h1>
+            </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-10 md:gap-x-40 gap-y-20 justify-center pt-16 md:pt-20 pb-10 md:pb-20">
-            @foreach($items as $menu)
-                <div class="relative max-w-sm md:w-64 flex flex-col justify-center p-2 md:p-2 bg-[#D9E3DD] border border-gray-200 rounded-b-lg shadow-sm rounded-lg">
-                    
-                    <div class="flex justify-center items-center">
-                        <img src="{{ asset($menu->picture) }}" 
-                            class="absolute w-28 h-28 md:w-36 md:h-36 rounded-full border-4 md:border-4 border-greenJagat object-cover -mt-16 top-4 -left-8" 
-                            alt="{{ $menu->product_name }}">
-                        <h1 class="font-semibold pl-20 md:pl-28 h-10 md:h-20 flex justify-center items-center text-sm md:text-2xl">
-                            {{ $menu->product_name }}
-                        </h1>
-                    </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-x-10 md:gap-x-40 gap-y-20 justify-center pt-16 md:pt-20 pb-10 md:pb-20">
+                @foreach($items as $menu)
+                    <div class="relative max-w-sm md:w-64 flex flex-col justify-center p-2 md:p-2 bg-[#D9E3DD] border border-gray-200 rounded-b-lg shadow-sm rounded-lg">
+                        
+                        <div class="flex justify-center items-center">
+                            <img src="{{ asset($menu->picture) }}" 
+                                class="absolute w-28 h-28 md:w-36 md:h-36 rounded-full border-4 md:border-4 border-greenJagat object-cover -mt-16 top-4 -left-8" 
+                                alt="{{ $menu->product_name }}">
+                            <h1 class="font-semibold pl-20 md:pl-28 h-10 md:h-20 flex justify-center items-center text-sm md:text-2xl">
+                                {{ $menu->product_name }}
+                            </h1>
+                        </div>
 
-                    <p class="mt-8 px-0 md:px-4 text-sm md:text-xl text-left leading-relaxed">
-                        {{ $menu->description ?? 'No description available' }}
-                    </p>
-
-                    <div class="flex justify-between items-center mb-4 mt-5 px-2">
-                        <p class="text-sm md:text-2xl text-center">
-                            Rp {{ number_format($menu->price, 0, ',', '.') }}
+                        <p class="mt-8 px-0 md:px-4 text-sm md:text-xl text-left leading-relaxed">
+                            {{ $menu->description ?? 'No description available' }}
                         </p>
-                        <a href="{{ route('customer.detail-item', ['id_menu' => $menu->id_menu, 'category' => $category]) }}"
-                        class="w-10 md:w-10 h-10 md:h-10 bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 -960 960 960" width="25px" fill="currentColor">
-                                <path d="M360-640v-80h240v80H360ZM280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM40-800v-80h131l170 360h280l156-280h91L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68.5-39t-1.5-79l54-98-144-304H40Z"/>
-                            </svg>
-                        </a>
+
+                        <div class="flex justify-between items-center mb-4 mt-5 px-2">
+                            <p class="text-sm md:text-2xl text-center">
+                                Rp {{ number_format($menu->price, 0, ',', '.') }}
+                            </p>
+                            <a href="{{ route('customer.detail-item', ['id_menu' => $menu->id_menu, 'category' => $category]) }}"
+                            class="w-10 md:w-10 h-10 md:h-10 bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 -960 960 960" width="25px" fill="currentColor">
+                                    <path d="M360-640v-80h240v80H360ZM280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM40-800v-80h131l170 360h280l156-280h91L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68.5-39t-1.5-79l54-98-144-304H40Z"/>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
-    @endforeach
+                @endforeach
+            </div>
+        @endforeach
+    @endif
 </div>
 
 @push('scripts')
+
+    <script>
+        (function () {
+        const input = document.getElementById('search-navbar');
+        if (!input) return;
+
+        const go = () => {
+            const q = input.value.trim();
+            const url = new URL("{{ route('customer.menu') }}", window.location.origin);
+            url.searchParams.set('category', 'all');
+            if (q) url.searchParams.set('q', q);
+            window.location.href = url.toString();
+        };
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+            e.preventDefault(); // cegah submit/refresh bawaan
+            go();
+            }
+        });
+        })();
+    </script>
+
    @if(session('success'))
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    <script>

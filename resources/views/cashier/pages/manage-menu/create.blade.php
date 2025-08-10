@@ -182,6 +182,19 @@
         priceInput.value = priceInput.value.replace(/[^0-9]/g, '');
     });
 </script>
+
+@if ($errors->any())
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const firstError = @json($errors->first());
+        const Toast = Swal.mixin({
+        toast: true, position: 'top-end', showConfirmButton: false, timer: 3000
+        });
+        Toast.fire({ icon: 'error', title: firstError });
+    });
+</script>
+@endif
 @endpush
 
 @endsection

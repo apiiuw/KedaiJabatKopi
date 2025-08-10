@@ -70,11 +70,11 @@
                {{-- Buttons --}}
                <div class="flex items-end gap-2">
                   <button type="submit"
-                           class="px-4 py-2 bg-greenJagat hover:bg-darkGreenJagat text-white rounded-md transition">
+                           class="px-4 py-2 bg-greenJagat hover:bg-darkGreenJagat text-white rounded-md transition duration-500 ease-in-out">
                         Set Period
                   </button>
                   <a href="{{ url()->current() }}"
-                     class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md transition">
+                     class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md transition duration-500 ease-in-out">
                         Reset
                   </a>
                </div>

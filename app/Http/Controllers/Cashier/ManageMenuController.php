@@ -35,7 +35,7 @@ class ManageMenuController extends Controller
 
         // Filter availability
         if ($availability = $request->input('availability')) {
-            if (in_array($availability, ['available','unavailable'])) {
+            if (in_array($availability, ['available','not available'])) {
                 $menusQuery->where('availability', $availability);
             }
         }
@@ -59,7 +59,7 @@ class ManageMenuController extends Controller
         $totalMenus  = Menu::count();
 
         // Flags notifikasi
-        $isFiltered    = $request->filled('q') || $request->filled('category');
+        $isFiltered    = $request->filled('q') || $request->filled('category') || $request->filled('availability');
         $filteredCount = $menus->count();
 
         $isSorted       = ($sort === 'price');
@@ -82,16 +82,53 @@ class ManageMenuController extends Controller
 
     public function store(Request $request)
     {
+        $messages = [
+            // product_name
+            'product_name.required' => 'Product name is required.',
+            'product_name.string'   => 'Product name must be text.',
+            'product_name.max'      => 'Product name may not be greater than :max characters.',
+
+            // description
+            'description.required'  => 'Description is required.',
+            'description.string'    => 'Description must be text.',
+
+            // category
+            'category.required'     => 'Category is required.',
+            'category.string'       => 'Category must be text.',
+
+            // type
+            'type.required'         => 'Type is required.',
+            'type.string'           => 'Type must be text.',
+
+            // custom_type (when type = Other)
+            'custom_type.required_if' => 'Please fill Custom Type when Type is "Other".',
+            'custom_type.string'      => 'Custom Type must be text.',
+
+            // availability
+            'availability.required' => 'Availability is required.',
+            'availability.string'   => 'Availability must be text.',
+
+            // price
+            'price.required'        => 'Price is required.',
+            'price.numeric'         => 'Price must be a number.',
+
+            // picture
+            'picture.required'      => 'Picture is required.',
+            'picture.image'         => 'Picture must be an image file.',
+            'picture.mimes'         => 'Picture must be a file of type: jpg, jpeg, png.',
+            'picture.max'           => 'Picture size must not exceed 2MB.',
+        ];
+
         $validated = $request->validate([
             'product_name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'category' => 'required|string',
-            'type' => 'nullable|string',
-            'custom_type' => 'nullable|string',
+            'description'  => 'required|string',
+            'category'     => 'required|string',
+            'type'         => 'required|string',
+            'custom_type'  => 'required_if:type,Other|nullable|string',
             'availability' => 'required|string',
-            'price' => 'required|numeric',
-            'picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
+            'price'        => 'required|numeric',
+            'picture'      => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ], $messages);
 
         // Generate id_menu format MENUxxxx (angka unik)
         do {
@@ -155,7 +192,6 @@ class ManageMenuController extends Controller
         return redirect()->route('cashier.manage-menu')
             ->with('success', 'Menu added successfully!');
     }
-
 
     public function editMenu($id_menu)
     {

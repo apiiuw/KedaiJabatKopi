@@ -177,10 +177,14 @@
 
     <!-- Info Box -->
     <div class="info-box">
-        <strong>Order ID:</strong> {{ $order->id_order }}
-        <strong>Table Number:</strong> {{ $order->table_number }}
-        <p>Your order has been successfully received and is being processed ☕</p>
+        <p><strong>Hello, {{ $order->name }}! 🍃</strong></p>
+
+        <strong>Order ID:</strong> {{ $order->id_order }}<br>
+        <strong>Table Number:</strong> {{ $order->table_number }}<br>
+
+        <p>Thank you for stopping by <em>Jabat Kopi</em>. Your special order is now brewing with care.</p>
     </div>
+
 
     <!-- Receipt -->
     <div class="receipt-container" style="font-family: monospace;">

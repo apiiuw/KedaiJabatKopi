@@ -11,7 +11,7 @@ class PastOrderController extends Controller
 {
     public function index(Request $request)
     {
-        $title = 'Past Orders';
+        $title = 'Cashier Past Orders';
 
         $query = Order::where('status', 'complete')
             ->whereDate('created_at', '<', Carbon::today());

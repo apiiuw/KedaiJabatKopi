@@ -15,9 +15,14 @@
         </button>
         <div class="relative hidden md:flex justify-end items-center space-x-2">
             <div class="relative w-full md:w-1/2">
-                <input type="text" id="search-navbar"
-                    class="block w-full h-auto md:h-9 px-2 ps-3 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 md:bg-white/5 md:text-white placeholder:text-white/70"
-                    placeholder="Search...">
+              <form action="{{ route('customer.menu') }}" method="GET">
+                <input 
+                  type="text" 
+                  name="q"
+                  id="search-navbar"
+                  placeholder="Search..."
+                  class="block w-full h-auto md:h-9 px-2 ps-3 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 md:bg-white/5 md:text-white placeholder:text-white/70">
+                <input type="hidden" name="category" value="all">
                 <div class="absolute inset-y-0 end-0 flex items-center pe-3 pointer-events-none">
                     <svg class="w-4 h-4 text-gray-500 md:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 20 20">
@@ -25,6 +30,7 @@
                             d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
                 </div>
+              </form>
             </div>
  
             <a href="{{ route('customer.cart') }}" class="relative flex items-center space-x-3 rtl:space-x-reverse text-white md:hover:text-gray-300 transition duration-300 ease-in-out">
@@ -78,7 +84,7 @@
             </svg>
           </button>
 
-          <!-- Submenu -->
+          <!-- Submenu --> 
           <ul id="submenu" class="absolute left-0 mt-2 md:mt-[1.6rem] hidden text-black md:text-white w-full md:w-40 z-50 bg-white md:bg-greenJagat/70 md:backdrop-blur-md">
             <li><a href="/menu?category=Drink" class="{{ request()->is('/menu?category=Drink') ? 'md:underline bg-greenJagat text-white' : '' }} block px-4 py-2 md:hover:text-gray-300 md:text-white transition duration-300 ease-in-out">The Drink</a></li>
             <li><a href="/menu?category=Food" class="{{ request()->is('/menu?category=Food') ? 'md:underline bg-greenJagat text-white' : '' }} block px-4 py-2 md:hover:text-gray-300 md:text-white transition duration-300 ease-in-out">The Food</a></li>
