@@ -9,17 +9,68 @@ use Intervention\Image\Facades\Image;
 
 class ManageMenuController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Cashier Manage Menu';
-        $menus = Menu::all(); // Semua menu
 
-        // Hitung total berdasarkan category
+        // Query dasar
+        $menusQuery = Menu::query();
+
+        // Search
+        if ($q = $request->input('q')) {
+            $q = trim($q);
+            $menusQuery->where(function ($s) use ($q) {
+                $s->where('product_name', 'like', "%{$q}%")
+                ->orWhere('type', 'like', "%{$q}%")
+                ->orWhere('id_menu', 'like', "%{$q}%");
+            });
+        }
+
+        // Filter kategori
+        if ($category = $request->input('category')) {
+            if (in_array($category, ['Food','Drink'])) {
+                $menusQuery->where('category', $category);
+            }
+        }
+
+        // Filter availability
+        if ($availability = $request->input('availability')) {
+            if (in_array($availability, ['available','unavailable'])) {
+                $menusQuery->where('availability', $availability);
+            }
+        }
+
+        // SORT (by price)
+        $sort = $request->input('sort');           // 'price' | null
+        $dir  = $request->input('dir', 'asc');     // 'asc' | 'desc'
+        $dir  = in_array($dir, ['asc','desc']) ? $dir : 'asc';
+
+        if ($sort === 'price') {
+            $menusQuery->orderBy('price', $dir);
+        } else {
+            $menusQuery->orderBy('product_name', 'asc'); // default
+        }
+
+        $menus = $menusQuery->get();
+
+        // Statistik (tidak terpengaruh filter/search)
         $totalDrinks = Menu::where('category', 'Drink')->count();
-        $totalFoods = Menu::where('category', 'Food')->count();
-        $totalMenus = $menus->count();
+        $totalFoods  = Menu::where('category', 'Food')->count();
+        $totalMenus  = Menu::count();
 
-        return view('cashier.pages.manage-menu.index', compact('title', 'menus', 'totalDrinks', 'totalFoods', 'totalMenus'));
+        // Flags notifikasi
+        $isFiltered    = $request->filled('q') || $request->filled('category');
+        $filteredCount = $menus->count();
+
+        $isSorted       = ($sort === 'price');
+        $sortedBy       = $isSorted ? 'Price' : '';
+        $sortedDirLabel = $dir === 'asc' ? 'Ascending' : 'Descending';
+
+        return view('cashier.pages.manage-menu.index', compact(
+            'title','menus','totalDrinks','totalFoods','totalMenus',
+            'isFiltered','filteredCount','isSorted','sortedBy','sortedDirLabel',
+            'sort','dir'
+        ));
     }
 
     public function addMenu()
