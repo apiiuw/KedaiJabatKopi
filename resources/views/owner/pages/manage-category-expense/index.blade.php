@@ -3,56 +3,56 @@
 
 <div class="p-4 sm:ml-64">
    <div class="p-4">
-      <h1 class="font-calistoga text-greenJagat text-3xl mb-6">Access Control</h1>
-      
+      <h1 class="font-calistoga text-greenJagat text-3xl mb-6">Manage Category Expense</h1>
+
       <div class="grid grid-cols-3 gap-4 mb-4">
 
          <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md">
-            <i class="fa-solid fa-user-tag fa-2xl text-white"></i>
+            <i class="fa-solid fa-sack-dollar fa-2xl text-white"></i>
             <div class="flex flex-col items-start">
-               <h1 class="text-white font-semibold text-xl">Total Cashier Account</h1>
-               <p class="text-2xl text-white counter" data-target="{{ $totalCashier }}">0</p>
+               <h1 class="text-white font-semibold text-xl">Total Category Active</h1>
+               <p class="text-2xl text-white counter" data-target="{{ $totalActive }}">0</p>
             </div>
          </div>
 
          <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md">
-            <i class="fa-solid fa-user-tie fa-2xl text-white"></i>
+            <i class="fa-solid fa-sack-xmark fa-2xl text-white"></i>
             <div class="flex flex-col items-start">
-               <h1 class="text-white font-semibold text-xl">Total Owner Account</h1>
-               <p class="text-2xl text-white counter" data-target="{{ $totalOwner }}">0</p>
+               <h1 class="text-white font-semibold text-xl">Total Category Deactive</h1>
+               <p class="text-2xl text-white counter" data-target="{{ $totalDeactive }}">0</p>
             </div>
          </div>
 
          <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md text-white">
-            <i class="fa-solid fa-users fa-2xl text-white"></i>
+            <i class="fa-solid fa-coins fa-2xl text-white"></i>
             <div class="flex flex-col items-start">
-               <h1 class="text-white font-semibold text-xl">Total Account</h1>
+               <h1 class="text-white font-semibold text-xl">Total Category Expense</h1>
                <p class="text-2xl text-white counter" data-target="{{ $totalAll }}">0</p>
             </div>
          </div>
 
       </div>
 
-      <form method="GET" action="" class="flex justify-between items-end mb-4 gap-3">
+      <form method="GET" action="{{ route('owner.manage-category-expense') }}" class="flex justify-between items-end mb-4 gap-3">
          {{-- Search --}}
          <div class="relative w-full md:w-1/3">
             <input type="text" name="search" value="{{ request('search') }}"
-                  placeholder="Search full name..."
+                  placeholder="Search category..."
                   class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-greenJagat outline-none text-greenJagat">
             <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400"></i>
          </div>
 
-         {{-- Filter Role + Add Account --}}
+         {{-- Filter Status + Add Category --}}
          <div class="flex items-end gap-3">
             {{-- Category --}}
             <div class="flex flex-col">
-               <label for="s_role" class="text-sm font-medium text-gray-700">Select Role</label>
-               <select name="s_role"
+               <label for="s_status" class="text-sm font-medium text-gray-700">Select Status</label>
+               <select name="s_status"
                         onchange="this.form.submit()"
                         class="border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-greenJagat outline-none text-greenJagat">
-                  <option value="">All Roles</option>
-                  <option value="Cashier" {{ request('s_role') == 'Cashier' ? 'selected' : '' }}>Cashier</option>
-                  <option value="Owner" {{ request('s_role') == 'Owner' ? 'selected' : '' }}>Owner</option>
+                  <option value="">All Status</option>
+                  <option value="Active" {{ request('s_status') == 'Active' ? 'selected' : '' }}>Active</option>
+                  <option value="Deactive" {{ request('s_status') == 'Deactive' ? 'selected' : '' }}>Deactive</option>
                </select>
             </div>
 
@@ -62,10 +62,10 @@
             </a>
 
             {{-- Add Menu --}}
-            <a href="{{ route('owner.access-control.add-account') }}"
+            <a href="{{ route('owner.manage-category-expense.add-category') }}"
                class="flex justify-center items-center py-2 px-4 bg-greenJagat text-md hover:bg-darkGreenJagat text-white rounded-md transition duration-500 ease-in-out">
                <i class="fa-solid fa-plus pb-1 mr-2"></i>
-               <span>Add Account</span>
+               <span>Add Category</span>
             </a>
          </div>
       </form>
@@ -76,30 +76,19 @@
             <thead class="text-md text-greenJagat uppercase bg-lightGreenJagat">
                   <tr>
                      <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                        ID Account
+                        ID Category Expense
                      </th>
                      <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                        <a href="{{ route('owner.access-control', [
-                           'sort' => 'date',
-                           'dir' => (request('sort') === 'date' && request('dir') === 'asc') ? 'desc' : 'asc'
-                        ]) }}"
-                           class="inline-flex items-center gap-1">
-                           Join Date
-                           @if(request('sort') === 'date')
-                                 <i class="fa-solid {{ request('dir') === 'asc' ? 'fa-sort-up pt-2' : 'fa-sort-down pb-2' }}"></i>
-                           @else
-                                 <i class="fa-solid fa-sort"></i>
-                           @endif
-                        </a>
+                        Category
                      </th>
                      <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                        Full Name
+                        Item Name
                      </th>
                      <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                        Email
+                        Price/Unit
                      </th>
                      <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                        Role
+                        Status
                      </th>
                      <th scope="col" class="px-6 py-3 whitespace-nowrap">
                         <span class="sr-only">Detail</span>
@@ -107,41 +96,41 @@
                   </tr>
             </thead>
             <tbody>
-            @foreach ($users as $user)
-               <tr class="bg-white border-b border-gray-200 hover:bg-[#F3F7F5]">
-                  <th scope="row" class="px-6 py-4 whitespace-nowrap">
-                        #{{ $user->id_user }}
-                  </th>
-                  <td class="px-6 py-4">
-                        {{ $user->created_at->format('d/m/Y') }}
-                  </td>
-                  <td class="px-6 py-4">
-                        {{ $user->name }}
-                  </td>
-                  <td class="px-6 py-4">
-                        {{ $user->email }}
-                  </td>
-                  <td class="px-6 py-4">
-                     @php
-                        $roleColors = [
-                              'cashier' => 'bg-blue-100 text-blue-800',
-                              'owner'   => 'bg-green-100 text-green-800',
-                        ];
-                     @endphp
-
-                     <span class="{{ $roleColors[$user->role] ?? 'bg-gray-100 text-gray-800' }} text-sm font-medium px-2.5 py-0.5 rounded capitalize">
-                        {{ $user->role }}
-                     </span>
-                  </td>
-                  <td class="px-6 py-4 text-right font-calistoga">
-                        <a href="{{ route('owner.access-control.edit', $user->id) }}"
-                           class="font-medium text-greenJagat hover:underline">
-                           Edit
-                        </a>
-                  </td>
-               </tr>
-            @endforeach
+               @forelse ($categories as $cat)
+                  <tr class="bg-white border-b border-gray-200 hover:bg-[#F3F7F5]">
+                        <th scope="row" class="px-6 py-4 whitespace-nowrap">
+                           #{{ $cat->id_category_expense }}
+                        </th>
+                        <td class="px-6 py-4">
+                           {{ $cat->category }}
+                        </td>
+                        <td class="px-6 py-4">
+                           {{ $cat->item_name }}
+                        </td>
+                        <td class="px-6 py-4">
+                           Rp {{ number_format($cat->price, 0, ',', '.') }}
+                        </td>
+                        <td class="px-6 py-4">
+                           <span class="{{ $cat->status == 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }} text-sm font-medium px-2.5 py-0.5 rounded capitalize">
+                              {{ $cat->status }}
+                           </span>
+                        </td>
+                        <td class="px-6 py-4 text-right font-calistoga">
+                           <a href="{{ route('owner.manage-category-expense.edit', $cat->id) }}"
+                              class="font-medium text-greenJagat hover:underline">
+                              Edit
+                           </a>
+                        </td>
+                  </tr>
+               @empty
+                  <tr>
+                        <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                           No category found.
+                        </td>
+                  </tr>
+               @endforelse
             </tbody>
+
 
 
          </table>
@@ -183,26 +172,33 @@
    </script>
 
    @if($isFiltered || $isSorted)
-      <script>
-         document.addEventListener('DOMContentLoaded', function () {
-         const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: false
-         });
+   <script>
+   document.addEventListener('DOMContentLoaded', function () {
+      const Toast = Swal.mixin({
+         toast: true,
+         position: 'top-end',
+         showConfirmButton: false,
+         timer: 3000,
+         timerProgressBar: false
+      });
 
-         @if($isFiltered)
-            Toast.fire({ icon: 'info', title: '{{ $filteredCount }} data found!' });
-         @endif
-
-         @if($isSorted)
-            Toast.fire({ icon: 'info', title: 'Sorted by {{ $sortedBy }} ({{ $sortedDirLabel }})' });
-         @endif
+      @if($isFiltered)
+         Toast.fire({
+            icon: 'info',
+            title: '{{ $filteredCount }} data found!'
          });
-      </script>
+      @endif
+
+      @if($isSorted)
+         Toast.fire({
+            icon: 'info',
+            title: 'Sorted by {{ $sortedBy }} ({{ $sortedDirLabel }})'
+         });
+      @endif
+   });
+   </script>
    @endif
+
 
    @if(session('success'))
       <script>

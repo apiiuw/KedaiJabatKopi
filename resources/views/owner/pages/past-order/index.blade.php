@@ -31,7 +31,7 @@
          </a>
       </div> --}} 
 
-      <form method="GET" action="{{ route('cashier.past-order') }}" class="mb-4">
+      <form method="GET" action="{{ route('owner.past-order') }}" class="mb-4">
          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
             
             {{-- Search di kiri --}}

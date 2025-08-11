@@ -3,7 +3,7 @@
 
 <div class="p-4 sm:ml-64">
    <div class="p-4">
-      <h1 class="font-calistoga text-greenJagat text-3xl mb-6">Dashboard</h1>
+      <h1 class="font-calistoga text-greenJagat text-3xl mb-6">Owner Dashboard</h1>
 
    </div>
 </div>

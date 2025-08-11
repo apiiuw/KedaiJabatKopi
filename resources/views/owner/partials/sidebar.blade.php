@@ -51,6 +51,23 @@
                </a>
             </li>
             <li>
+               <a href="{{ route('owner.manage-category-expense') }}" 
+                  class="{{ request()->is('owner/manage-category-expense') 
+                     || request()->is('owner/manage-category-expense/add-category') 
+                     || request()->is('owner/manage-category-expense/edit*') 
+                     ? 'bg-greenJagat text-white' 
+                     : 'hover:bg-lightGreenJagat' }}  
+                     flex items-center p-2 text-greenJagat rounded-lg group transition duration-500 ease-in-out">
+
+                  <i class="fa-solid fa-coins fa-lg shrink-0 text-greenJagat transition duration-500 ease-in-out 
+                  {{ request()->is('owner/manage-category-expense') 
+                           || request()->is('owner/manage-category-expense/add-category') 
+                           || request()->is('owner/manage-category-expense/edit*') 
+                           ? 'text-white' : '' }}"></i>
+                  <span class="flex-1 ms-3 whitespace-nowrap">Manage Category Expense</span>
+               </a>
+            </li>
+            <li>
                <a href="{{ route('owner.past-order') }}" class="{{ request()->is('owner/past-order') ? 'bg-greenJagat text-white' : 'hover:bg-lightGreenJagat' }} flex items-center p-2 text-greenJagat rounded-lg group transition duration-500 ease-in-out">
                   <i class="fa-solid fa-clock-rotate-left fa-lg shrink-0 text-greenJagat transition duration-500 ease-in-out {{ request()->is('owner/past-order') ? 'text-white' : '' }}"></i>
                   <span class="flex-1 ms-3 whitespace-nowrap">Past Order</span>
@@ -67,8 +84,19 @@
                 </a>
             </li>
             <li>
-               <a href="{{ route('owner.access-control') }}" class="{{ request()->is('owner/access-control') ? 'bg-greenJagat text-white' : 'hover:bg-lightGreenJagat' }} flex items-center p-2 text-greenJagat rounded-lg group transition duration-500 ease-in-out">
-                  <i class="fa-solid fa-universal-access fa-lg shrink-0 text-greenJagat transition duration-500 ease-in-out {{ request()->is('owner/access-control') ? 'text-white' : '' }}"></i>
+               <a href="{{ route('owner.access-control') }}" 
+                  class="{{ request()->is('owner/access-control') 
+                     || request()->is('owner/access-control/add-account') 
+                     || request()->is('owner/access-control/edit*') 
+                     ? 'bg-greenJagat text-white' 
+                     : 'hover:bg-lightGreenJagat' }} 
+                     flex items-center p-2 text-greenJagat rounded-lg group transition duration-500 ease-in-out">
+
+                  <i class="fa-solid fa-universal-access fa-lg shrink-0 text-greenJagat transition duration-500 ease-in-out 
+                  {{ request()->is('owner/access-control') 
+                           || request()->is('owner/access-control/add-account') 
+                           || request()->is('owner/access-control/edit*') 
+                           ? 'text-white' : '' }}"></i>
                   <span class="flex-1 ms-3 whitespace-nowrap">Access Control</span>
                </a>
             </li>

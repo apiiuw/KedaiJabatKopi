@@ -15,6 +15,7 @@ use App\Http\Controllers\Cashier\ManageMenuController;
 use App\Http\Controllers\Owner\ODashboardController;
 use App\Http\Controllers\Owner\DailysExpenseController;
 use App\Http\Controllers\Owner\ExpenseRecordsController;
+use App\Http\Controllers\Owner\ManageCategoryExpenseController;
 use App\Http\Controllers\Owner\ReportController;
 use App\Http\Controllers\Owner\AccessControlController;
 use App\Http\Controllers\Owner\OPastOrderController;
@@ -88,6 +89,13 @@ Route::middleware('role:owner')->group(function () {
     // Expense Records
     Route::get('/owner/expense-records', [ExpenseRecordsController::class, 'index'])->name('owner.expense-records');
 
+    // Manage Category Expense
+    Route::get('/owner/manage-category-expense', [ManageCategoryExpenseController::class, 'index'])->name('owner.manage-category-expense');
+    Route::get('/owner/manage-category-expense/add-category', [ManageCategoryExpenseController::class, 'addCategory'])->name('owner.manage-category-expense.add-category');
+    Route::post('/owner/manage-category-expense/add-category/store', [ManageCategoryExpenseController::class, 'storeCategory'])->name('owner.manage-category-expense.store');
+    Route::get('/owner/manage-category-expense/edit/{id}', [ManageCategoryExpenseController::class, 'edit'])->name('owner.manage-category-expense.edit');
+    Route::put('/owner/manage-category-expense/{id}', [ManageCategoryExpenseController::class, 'update'])->name('owner.manage-category-expense.update');
+
     // Past Order
     Route::get('/owner/past-order', [OPastOrderController::class, 'index'])->name('owner.past-order');
 
@@ -96,4 +104,9 @@ Route::middleware('role:owner')->group(function () {
 
     // Access Control
     Route::get('/owner/access-control', [AccessControlController::class, 'index'])->name('owner.access-control');
+    Route::get('/owner/access-control/add-account', [AccessControlController::class, 'addAccount'])->name('owner.access-control.add-account');
+    Route::post('/owner/access-control/add-account/store', [AccessControlController::class, 'storeAccount'])->name('owner.access-control.add-account.store');
+    Route::get('/owner/access-control/edit/{id}', [AccessControlController::class, 'edit'])->name('owner.access-control.edit');
+    Route::put('/owner/access-control/{id}', [AccessControlController::class, 'update'])->name('owner.access-control.update');
+    Route::delete('/owner/manage-category-expense/{id}', [ManageCategoryExpenseController::class, 'destroy'])->name('owner.manage-category-expense.destroy');
 });
