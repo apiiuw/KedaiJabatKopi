@@ -21,30 +21,40 @@ class AuthController extends Controller
 
     public function signIn(Request $request)
     {
-        $credentials = $request->validate([
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+        // Cek user berdasarkan email
+        $user = User::where('email', $request->email)->first();
 
-            // Ambil role user yang login
-            $role = Auth::user()->role;
-
-            if ($role === 'cashier') {
-                return redirect()->intended('/cashier/dashboard');
-            } elseif ($role === 'owner') {
-                return redirect()->intended('/owner/dashboard');
-            } else {
-                // Default jika role = customer
-                return redirect()->intended('/');
-            }
+        if (!$user) {
+            // Email tidak ditemukan
+            return back()->withErrors([
+                'email' => 'This email is not registered!'
+            ])->withInput();
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ]);
+        // Cek password
+        if (!Hash::check($request->password, $user->password)) {
+            // Password salah
+            return back()->withErrors([
+                'password' => 'Incorrect password. Please try again!'
+            ])->withInput();
+        }
+
+        // Login jika email & password cocok
+        Auth::login($user);
+        $request->session()->regenerate();
+
+        if ($user->role === 'cashier') {
+            return redirect()->intended('/cashier/dashboard');
+        } elseif ($user->role === 'owner') {
+            return redirect()->intended('/owner/dashboard');
+        } else {
+            return redirect()->intended('/');
+        }
     }
 
     public function signOut(Request $request)

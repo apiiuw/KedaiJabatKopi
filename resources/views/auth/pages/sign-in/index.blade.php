@@ -1,9 +1,35 @@
 @extends('auth.layouts.main')
 @section('container')
 
-<div class="hero min-h-screen bg-cover" style="background-image: url('{{ asset('img/background/bg-auth.png') }}');">
-    <div class="bg-black/50 w-full h-screen flex flex-col justify-center items-center">
-        <div class="bg-white/60 py-6 px-6 rounded-md border border-greenJagat w-full max-w-md">
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes mainFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .main-fade-in {
+        animation: mainFadeIn 1s ease-out forwards;
+    }
+
+    .animate-fadeInUp {
+        animation: fadeInUp 0.7s ease-out forwards;
+    }
+</style>
+
+<div class="hero min-h-screen bg-cover main-fade-in" style="background-image: url('{{ asset('img/background/bg-auth.png') }}');">
+    <div class="bg-black/50 w-full h-screen flex flex-col justify-center items-center main-fade-in">
+        <div class="bg-white/60 py-6 px-6 rounded-md border border-greenJagat w-full max-w-md animate-fadeInUp">
             <div class="bg-greenJagat text-white text-xl rounded-3xl w-fit px-6 py-3 mb-5">
                 <h1 class="font-calistoga">Sign In</h1>
             </div>
@@ -34,5 +60,19 @@
     </div>
 </div>
 
+@push('scripts')
+    @if ($errors->any())
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const firstError = @json($errors->first());
+                const Toast = Swal.mixin({
+                toast: true, position: 'top-end', showConfirmButton: false, timer: 3000
+                });
+                Toast.fire({ icon: 'error', title: firstError });
+            });
+        </script>
+    @endif
+@endpush
 
 @endsection

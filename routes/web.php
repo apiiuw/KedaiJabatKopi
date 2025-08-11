@@ -12,7 +12,12 @@ use App\Http\Controllers\Cashier\DashboardController;
 use App\Http\Controllers\Cashier\OrderController;
 use App\Http\Controllers\Cashier\PastOrderController;
 use App\Http\Controllers\Cashier\ManageMenuController;
-use App\Http\Controllers\Cashier\ReportController;
+use App\Http\Controllers\Owner\ODashboardController;
+use App\Http\Controllers\Owner\DailysExpenseController;
+use App\Http\Controllers\Owner\ExpenseRecordsController;
+use App\Http\Controllers\Owner\ReportController;
+use App\Http\Controllers\Owner\AccessControlController;
+use App\Http\Controllers\Owner\OPastOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +57,7 @@ Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->na
 
 // ROLE CASHIER
 Route::middleware('role:cashier')->group(function () {
+    // Dashboard Cashier
     Route::get('/cashier/dashboard', [DashboardController::class, 'index'])->name('cashier.dashboard');
 
     // Today's Order
@@ -69,13 +75,25 @@ Route::middleware('role:cashier')->group(function () {
 
     Route::get('/cashier/manage-menu/edit-menu/{id_menu}', [ManageMenuController::class, 'editMenu'])->name('cashier.manage-menu.edit');
     Route::put('/cashier/manage-menu/edit-menu/{id_menu}/update', [ManageMenuController::class, 'update'])->name('cashier.manage-menu.update');
-
-    // Report
-    Route::get('/cashier/report', [ReportController::class, 'index'])->name('cashier.report');
 });
 
 // ROLE OWNER
 Route::middleware('role:owner')->group(function () {
-    // Contoh:
-    // Route::get('/owner/dashboard', [OwnerDashboardController::class, 'index'])->name('owner.dashboard');
+    // Dashboard Owner
+    Route::get('/owner/dashboard', [ODashboardController::class, 'index'])->name('owner.dashboard');
+
+    // Daily's Expense
+    Route::get('/owner/dailys-expense', [DailysExpenseController::class, 'index'])->name('owner.dailys-expense');
+
+    // Expense Records
+    Route::get('/owner/expense-records', [ExpenseRecordsController::class, 'index'])->name('owner.expense-records');
+
+    // Past Order
+    Route::get('/owner/past-order', [OPastOrderController::class, 'index'])->name('owner.past-order');
+
+    // Report
+    Route::get('/owner/report', [ReportController::class, 'index'])->name('owner.report');
+
+    // Access Control
+    Route::get('/owner/access-control', [AccessControlController::class, 'index'])->name('owner.access-control');
 });
