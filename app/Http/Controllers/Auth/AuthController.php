@@ -98,7 +98,7 @@ class AuthController extends Controller
             return redirect('/');
 
         } catch (\Exception $e) {
-            return redirect('/auth/sign-in')->withErrors(['google' => 'Login Google gagal']);
+            return redirect('/auth/sign-in')->withErrors(['google' => 'Google login failed!']);
         }
     }
 }
