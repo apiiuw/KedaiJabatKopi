@@ -3,13 +3,13 @@
 
 <div class="p-4 sm:ml-64">
    <div class="p-4">
-      <h1 class="font-calistoga text-greenJagat text-3xl mb-6">Past Order</h1>
+      <h1 class="font-calistoga text-greenJagat text-3xl mb-6">Order Records</h1>
       <div class="grid grid-cols-2 gap-4 mb-4">
 
          <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md text-white">
             <i class="fa-solid fa-clipboard-list fa-2xl text-white"></i>
             <div class="flex flex-col items-start">
-               <h1 class="text-white font-semibold text-xl">Total Past Order</h1>
+               <h1 class="text-white font-semibold text-xl">Total Order Records</h1>
                <p class="text-2xl text-white counter" data-target="{{ $countPastOrdersAll }}"></p>
             </div>
          </div>
@@ -17,7 +17,7 @@
          <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md">
             <i class="fa-solid fa-sack-dollar fa-2xl text-white"></i>
             <div class="flex flex-col items-start">
-               <h1 class="text-white font-semibold text-xl">Total Income</h1>
+               <h1 class="text-white font-semibold text-xl">Total Income Records</h1>
                <p class="text-2xl text-white counter" data-target="{{ $totalIncomePastAll }}" data-currency="idr"></p>
             </div>
          </div>
@@ -31,7 +31,7 @@
          </a>
       </div> --}} 
 
-      <form method="GET" action="{{ route('owner.past-order') }}" class="mb-4">
+      <form method="GET" action="{{ route('owner.order-records') }}" class="mb-4">
          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
             
             {{-- Search di kiri --}}
@@ -48,6 +48,17 @@
 
             {{-- Filter tanggal di kanan --}}
             <div class="flex flex-col md:flex-row items-start md:items-end gap-3">
+
+               <div class="flex flex-col">
+                  <label for="status" class="text-sm font-medium text-gray-700">Status</label>
+                  <select id="status" name="status" onchange="this.form.submit()"
+                           class="border border-gray-300 rounded-md px-3 py-2">
+                     <option value="" {{ request('status')==='' ? 'selected' : '' }}>All</option>
+                     <option value="paid" {{ request('status')==='paid' ? 'selected' : '' }}>Paid</option>
+                     <option value="on going" {{ request('status')==='on going' ? 'selected' : '' }}>On Going</option>
+                     <option value="complete" {{ request('status')==='complete' ? 'selected' : '' }}>Complete</option>
+                  </select>
+               </div>
                
                {{-- Start Date --}}
                <div class="flex flex-col">
@@ -97,7 +108,7 @@
                         ID Order
                      </th>
                      <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                        <a href="{{ route('cashier.past-order', array_merge(request()->all(), ['sort'=>'date','dir'=>$nextDirDate])) }}"
+                        <a href="{{ route('owner.order-records', array_merge(request()->all(), ['sort'=>'date','dir'=>$nextDirDate])) }}"
                            class="inline-flex items-center gap-1">
                         Date
                         @if(request('sort')==='date')
@@ -114,7 +125,7 @@
                         Name
                      </th>
                      <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                        <a href="{{ route('cashier.past-order', array_merge(request()->all(), ['sort'=>'amount','dir'=>$nextDirAmount])) }}"
+                        <a href="{{ route('owner.order-records', array_merge(request()->all(), ['sort'=>'amount','dir'=>$nextDirAmount])) }}"
                            class="inline-flex items-center gap-1">
                         Total Amount
                         @if(request('sort')==='amount')
@@ -151,9 +162,23 @@
                            Rp {{ number_format($order->total_amount, 0, ',', '.') }}
                         </td>
                         <td class="px-6 py-4">
-                           <span class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded">
-                              {{ ucwords($order->status) }}
-                           </span>
+                           @if ($order->status == 'paid')
+                              <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">
+                                    {{ ucwords($order->status) }}
+                              </span>
+                           @elseif ($order->status == 'on going')
+                              <span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-2.5 py-0.5 rounded">
+                                    {{ ucwords($order->status) }}
+                              </span>
+                           @elseif ($order->status == 'complete')
+                              <span class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded">
+                                    {{ ucwords($order->status) }}
+                              </span>
+                           @else
+                              <span class="bg-gray-100 text-gray-800 text-sm font-medium px-2.5 py-0.5 rounded">
+                                    {{ ucwords($order->status) }}
+                              </span>
+                           @endif
                         </td>
                         <td class="px-6 py-4 text-right font-calistoga">
                            <button type="button"

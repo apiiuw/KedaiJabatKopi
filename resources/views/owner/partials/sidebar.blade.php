@@ -79,9 +79,9 @@
                </a>
             </li>
             <li>
-               <a href="{{ route('owner.past-order') }}" class="{{ request()->is('owner/past-order') ? 'bg-greenJagat text-white' : 'hover:bg-lightGreenJagat' }} flex items-center p-2 text-greenJagat rounded-lg group transition duration-500 ease-in-out">
-                  <i class="fa-solid fa-clock-rotate-left fa-lg shrink-0 text-greenJagat transition duration-500 ease-in-out {{ request()->is('owner/past-order') ? 'text-white' : '' }}"></i>
-                  <span class="flex-1 ms-3 whitespace-nowrap">Past Order</span>
+               <a href="{{ route('owner.order-records') }}" class="{{ request()->is('owner/order-records') ? 'bg-greenJagat text-white' : 'hover:bg-lightGreenJagat' }} flex items-center p-2 text-greenJagat rounded-lg group transition duration-500 ease-in-out">
+                  <i class="fa-solid fa-clock-rotate-left fa-lg shrink-0 text-greenJagat transition duration-500 ease-in-out {{ request()->is('owner/order-records') ? 'text-white' : '' }}"></i>
+                  <span class="flex-1 ms-3 whitespace-nowrap">Order Records</span>
                </a>
             </li>
             <li>

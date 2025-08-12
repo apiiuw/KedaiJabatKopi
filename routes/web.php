@@ -18,7 +18,7 @@ use App\Http\Controllers\Owner\ExpenseRecordsController;
 use App\Http\Controllers\Owner\ManageCategoryExpenseController;
 use App\Http\Controllers\Owner\ReportController;
 use App\Http\Controllers\Owner\AccessControlController;
-use App\Http\Controllers\Owner\OPastOrderController;
+use App\Http\Controllers\Owner\OrderRecordsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,7 +103,7 @@ Route::middleware('role:owner')->group(function () {
     Route::put('/owner/manage-category-expense/{id}', [ManageCategoryExpenseController::class, 'update'])->name('owner.manage-category-expense.update');
 
     // Past Order
-    Route::get('/owner/past-order', [OPastOrderController::class, 'index'])->name('owner.past-order');
+    Route::get('/owner/order-records', [OrderRecordsController::class, 'index'])->name('owner.order-records');
 
     // Report
     Route::get('/owner/report', [ReportController::class, 'index'])->name('owner.report');

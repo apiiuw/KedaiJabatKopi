@@ -3,7 +3,7 @@
 
 <div class="p-4 sm:ml-64">
    <div class="p-4">
-      <h1 class="font-calistoga text-greenJagat text-3xl mb-6">Daily's Expense</h1>
+      <h1 class="font-calistoga text-greenJagat text-3xl mb-6">Daily's Expense- {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</h1>
 
       <div class="grid grid-cols-2 gap-4 mb-4">
 
