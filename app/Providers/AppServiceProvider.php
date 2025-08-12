@@ -4,9 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\Expense;
 use Illuminate\Support\Facades\View;
 use Carbon\Carbon;
-use App\Models\Order;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -39,6 +40,13 @@ class AppServiceProvider extends ServiceProvider
                 ->count();
 
             $view->with('countPaid', $countPaid);
+        });
+
+        View::composer('*', function ($view) {
+            if (auth()->check() && auth()->user()->role === 'owner') {
+                $todayExpenseCount = Expense::whereDate('created_at', Carbon::today())->count();
+                $view->with('todayExpenseCount', $todayExpenseCount);
+            }
         });
     }
 

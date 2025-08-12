@@ -85,6 +85,12 @@ Route::middleware('role:owner')->group(function () {
 
     // Daily's Expense
     Route::get('/owner/dailys-expense', [DailysExpenseController::class, 'index'])->name('owner.dailys-expense');
+    Route::get('/owner/dailys-expense/add-expense', [DailysExpenseController::class, 'addExpense'])->name('owner.dailys-expense.add-expense');
+    Route::post('/owner/dailys-expense/store', [DailysExpenseController::class, 'storeExpense'])->name('owner.dailys-expense.store');
+    Route::get('/owner/dailys-expense/get-items', [DailysExpenseController::class, 'getItemsByCategory'])->name('owner.dailys-expense.get-items');
+    Route::get('/owner/dailys-expense/get-price', [DailysExpenseController::class, 'getPriceByCategoryAndItem'])->name('owner.dailys-expense.get-price');
+    Route::get('/owner/dailys-expense/edit/{id}', [DailysExpenseController::class, 'edit'])->name('owner.dailys-expense.edit');
+    Route::put('/owner/dailys-expense/{id}', [DailysExpenseController::class, 'update'])->name('owner.dailys-expense.update');
 
     // Expense Records
     Route::get('/owner/expense-records', [ExpenseRecordsController::class, 'index'])->name('owner.expense-records');

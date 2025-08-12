@@ -38,10 +38,21 @@
                </a>
             </li>
             <li>
-               <a href="{{ route('owner.dailys-expense') }}" class="{{ request()->is('owner/dailys-expense') ? 'bg-greenJagat text-white' : 'hover:bg-lightGreenJagat' }} flex items-center p-2 text-greenJagat rounded-lg group transition duration-500 ease-in-out">
-                  <i class="fa-solid fa-money-bill-transfer fa-lg shrink-0 text-greenJagat transition duration-500 ease-in-out {{ request()->is('owner/dailys-expense') ? 'text-white' : '' }}"></i>
+               <a href="{{ route('owner.dailys-expense') }}" 
+                  class="{{ request()->is('owner/dailys-expense')
+                     || request()->is('owner/dailys-expense/add-expense') 
+                     || request()->is('owner/dailys-expense/edit*') 
+                     ? 'bg-greenJagat text-white' 
+                     : 'hover:bg-lightGreenJagat' }}  
+                     flex items-center p-2 text-greenJagat rounded-lg group transition duration-500 ease-in-out">
+
+                  <i class="fa-solid fa-money-bill-transfer fa-lg shrink-0 text-greenJagat transition duration-500 ease-in-out 
+                     {{ request()->is('owner/dailys-expense')
+                        || request()->is('owner/dailys-expense/add-expense') 
+                        || request()->is('owner/dailys-expense/edit*') 
+                        ? 'text-white' : '' }}"></i>
                   <span class="flex-1 ms-3 whitespace-nowrap">Daily's Expense</span>
-                  <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-darkGreenJagat bg-[{{ route('owner.dashboard') }}9FB9A9]/70 rounded-full">3</span>
+                  <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-darkGreenJagat bg-[#9FB9A9]/70 rounded-full">{{ $todayExpenseCount ?? 0 }}</span>
                </a>
             </li>
             <li>
@@ -60,10 +71,10 @@
                      flex items-center p-2 text-greenJagat rounded-lg group transition duration-500 ease-in-out">
 
                   <i class="fa-solid fa-coins fa-lg shrink-0 text-greenJagat transition duration-500 ease-in-out 
-                  {{ request()->is('owner/manage-category-expense') 
-                           || request()->is('owner/manage-category-expense/add-category') 
-                           || request()->is('owner/manage-category-expense/edit*') 
-                           ? 'text-white' : '' }}"></i>
+                     {{ request()->is('owner/manage-category-expense') 
+                        || request()->is('owner/manage-category-expense/add-category') 
+                        || request()->is('owner/manage-category-expense/edit*') 
+                        ? 'text-white' : '' }}"></i>
                   <span class="flex-1 ms-3 whitespace-nowrap">Manage Category Expense</span>
                </a>
             </li>

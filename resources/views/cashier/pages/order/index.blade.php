@@ -9,37 +9,37 @@
 
       <div class="grid grid-cols-4 gap-4 mb-4">
 
-      <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md">
-         <i class="fa-solid fa-credit-card fa-2xl text-white"></i>
-         <div class="flex flex-col items-start">
-            <h1 class="text-white font-semibold text-xl">Total Order Paid</h1>
-            <p class="text-2xl text-white counter" data-target="{{ $countPaids }}">0</p>
+         <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md">
+            <i class="fa-solid fa-credit-card fa-2xl text-white"></i>
+            <div class="flex flex-col items-start">
+               <h1 class="text-white font-semibold text-xl">Total Order Paid</h1>
+               <p class="text-2xl text-white counter" data-target="{{ $countPaids }}">0</p>
+            </div>
          </div>
-      </div>
 
-      <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md">
-         <i class="fa-solid fa-clipboard-question fa-2xl text-white"></i>
-         <div class="flex flex-col items-start">
-            <h1 class="text-white font-semibold text-xl">Total Order On Going</h1>
-            <p class="text-2xl text-white counter" data-target="{{ $countOnGoing }}">0</p>
+         <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md">
+            <i class="fa-solid fa-clipboard-question fa-2xl text-white"></i>
+            <div class="flex flex-col items-start">
+               <h1 class="text-white font-semibold text-xl">Total Order On Going</h1>
+               <p class="text-2xl text-white counter" data-target="{{ $countOnGoing }}">0</p>
+            </div>
          </div>
-      </div>
 
-      <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md">
-         <i class="fa-solid fa-clipboard-check fa-2xl text-white"></i>
-         <div class="flex flex-col items-start">
-            <h1 class="text-white font-semibold text-xl">Total Order Complete</h1>
-            <p class="text-2xl text-white counter" data-target="{{ $countComplete }}">0</p>
+         <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md">
+            <i class="fa-solid fa-clipboard-check fa-2xl text-white"></i>
+            <div class="flex flex-col items-start">
+               <h1 class="text-white font-semibold text-xl">Total Order Complete</h1>
+               <p class="text-2xl text-white counter" data-target="{{ $countComplete }}">0</p>
+            </div>
          </div>
-      </div>
 
-      <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md text-white">
-         <i class="fa-solid fa-clipboard-list fa-2xl text-white"></i>
-         <div class="flex flex-col items-start">
-            <h1 class="text-white font-semibold text-xl">Total Order</h1>
-            <p class="text-2xl text-white counter" data-target="{{ $countAll }}">0</p>
+         <div class="flex flex-row-reverse items-center justify-between h-32 bg-greenJagat px-6 rounded-md text-white">
+            <i class="fa-solid fa-clipboard-list fa-2xl text-white"></i>
+            <div class="flex flex-col items-start">
+               <h1 class="text-white font-semibold text-xl">Total Order</h1>
+               <p class="text-2xl text-white counter" data-target="{{ $countAll }}">0</p>
+            </div>
          </div>
-      </div>
 
       </div>
 
