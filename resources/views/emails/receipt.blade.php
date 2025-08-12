@@ -6,6 +6,51 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Calistoga&display=swap" rel="stylesheet">
     <style>
+        @media (max-width: 600px) {
+            body {
+                font-size: 12px !important;
+            }
+
+            .receipt-header {
+                font-size: 16px !important;
+            }
+
+            .receipt-table {
+                font-size: 10px !important;  /* Font lebih kecil */
+            }
+
+            .receipt-table th, 
+            .receipt-table td {
+                padding: 4px 6px !important;  /* Padding diperkecil agar muat */
+            }
+
+            .receipt-description {
+                font-size: 9px !important;   /* Deskripsi teks lebih kecil */
+            }
+
+            /* Jika mau agar kolom tetap pas dan mudah dibaca, bisa set wrapping teks */
+            .receipt-table td {
+                word-wrap: break-word;
+                white-space: normal;
+            }
+
+            .receipt-total {
+                font-size: 14px !important;
+            }
+
+            .receipt-footer {
+                font-size: 10px !important;
+            }
+
+            .motivational-text {
+                font-size: 10px !important;
+            }
+
+            .footer {
+                font-size: 9px !important;
+            }
+        }
+
         body {
             font-family: 'Amiri', serif;
             background-color: #f9f9f9;
@@ -31,6 +76,18 @@
             font-family: 'Calistoga', cursive;
             font-size: clamp(20px, 3vw, 28px);
             margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .header img {
+                width: 50px;
+                margin-bottom: 5px;
+            }
+            .header h2 {
+                font-family: 'Calistoga', cursive;
+                font-size: 18px; 
+                margin: 0;
+            }
         }
 
         .info-box {

@@ -107,6 +107,7 @@ Route::middleware('role:owner')->group(function () {
 
     // Report
     Route::get('/owner/report', [ReportController::class, 'index'])->name('owner.report');
+    Route::get('/owner/report/export-pdf', [ReportController::class, 'exportPdf'])->name('owner.report.export-pdf');
 
     // Access Control
     Route::get('/owner/access-control', [AccessControlController::class, 'index'])->name('owner.access-control');
