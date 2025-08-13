@@ -34,5 +34,17 @@
 
         <script defer src="https://js.stripe.com/v3/"></script>
         <script defer src="https://m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+        
+        <script>
+            function storeClosedAlert() {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Store Closed',
+                    text: 'Sorry, we are currently closed. Please check our operating hours.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#2E6342'
+                });
+            }
+        </script>
     </body>
 </html>

@@ -33,6 +33,7 @@
               </form>
             </div>
  
+            @if($isStoreOpen)
             <a href="{{ route('customer.cart') }}" class="relative flex items-center space-x-3 rtl:space-x-reverse text-white md:hover:text-gray-300 transition duration-300 ease-in-out">
                 <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="currentColor">
                     <path d="M360-640v-80h240v80H360ZM280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM40-800v-80h131l170 360h280l156-280h91L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68.5-39t-1.5-79l54-98-144-304H40Z"/>
@@ -43,6 +44,20 @@
                     </span>
                 @endif
             </a>
+            @else
+              <button type="button"
+                  onclick="storeClosedAlert()"
+                  class="relative flex items-center space-x-3 rtl:space-x-reverse text-gray-400 md:hover:text-gray-200 transition duration-300 ease-in-out">
+                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="currentColor">
+                    <path d="M360-640v-80h240v80H360ZM280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM40-800v-80h131l170 360h280l156-280h91L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68.5-39t-1.5-79l54-98-144-304H40Z"/>
+                </svg>
+                @if($cartCount > 0)
+                    <span class="absolute -top-1 -right-1 bg-lightGreenJagat text-black text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                        {{ $cartCount }}
+                    </span>
+                @endif
+            </button>
+            @endif
         </div>
 
         <a href="{{ route('customer.cart') }}" class="relative flex items-center rtl:space-x-reverse md:hidden text-white">

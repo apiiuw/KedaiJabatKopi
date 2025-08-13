@@ -213,18 +213,6 @@
             });
         </script>
     @endif
-
-    <script>
-    function storeClosedAlert() {
-        Swal.fire({
-            icon: 'info',
-            title: 'Store Closed',
-            text: 'Sorry, we are currently closed. Please check our operating hours.',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#2E6342'
-        });
-    }
-    </script>
 @endpush
 
 
