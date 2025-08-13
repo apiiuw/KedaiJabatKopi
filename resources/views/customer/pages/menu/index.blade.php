@@ -77,8 +77,16 @@
                             <p class="text-sm md:text-2xl text-center">
                                 Rp {{ number_format($menu->price, 0, ',', '.') }}
                             </p>
-                            <a href="{{ route('customer.detail-item', ['id_menu' => $menu->id_menu, 'category' => $category]) }}"
-                            class="w-10 md:w-10 h-10 md:h-10 bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
+                            <a 
+                                @if($isStoreOpen)
+                                    href="{{ route('customer.detail-item', ['id_menu' => $menu->id_menu, 'category' => $category]) }}"
+                                    class="w-10 md:w-10 h-10 md:h-10 bg-greenJagat hover:bg-darkGreenJagat transition duration-500 ease-in-out text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md"
+                                @else
+                                    href="javascript:void(0)"
+                                    class="w-10 md:w-10 h-10 md:h-10 bg-gray-400 text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md cursor-not-allowed"
+                                    onclick="storeClosedAlert()"
+                                @endif
+                            >
                                 <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 -960 960 960" width="25px" fill="currentColor">
                                     <path d="M360-640v-80h240v80H360ZM280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM40-800v-80h131l170 360h280l156-280h91L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68.5-39t-1.5-79l54-98-144-304H40Z"/>
                                 </svg>
@@ -92,6 +100,8 @@
 </div>
 
 @push('scripts')
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         (function () {
@@ -116,7 +126,6 @@
     </script>
 
    @if(session('success'))
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    <script>
       document.addEventListener('DOMContentLoaded', function () {
          const Toast = Swal.mixin({
@@ -138,6 +147,19 @@
       });
    </script>
    @endif
+
+    @if(!$isStoreOpen)
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Swal.fire({
+            icon: 'info',
+            title: 'Store Closed',
+            text: 'Sorry, we are currently closed. Please check our operating hours.',
+            confirmButtonColor: '#2E6342',
+        });
+    });
+    </script>
+    @endif
 @endpush
 
 @endsection

@@ -19,6 +19,7 @@ use App\Http\Controllers\Owner\ManageCategoryExpenseController;
 use App\Http\Controllers\Owner\ReportController;
 use App\Http\Controllers\Owner\AccessControlController;
 use App\Http\Controllers\Owner\OrderRecordsController;
+use App\Http\Controllers\Owner\StoreOperationalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,4 +117,10 @@ Route::middleware('role:owner')->group(function () {
     Route::get('/owner/access-control/edit/{id}', [AccessControlController::class, 'edit'])->name('owner.access-control.edit');
     Route::put('/owner/access-control/{id}', [AccessControlController::class, 'update'])->name('owner.access-control.update');
     Route::delete('/owner/manage-category-expense/{id}', [ManageCategoryExpenseController::class, 'destroy'])->name('owner.manage-category-expense.destroy');
+
+    // Store Operational Schedule
+    Route::get('/owner/store-operational-schedule', [StoreOperationalController::class, 'index'])->name('owner.store-operational-schedule');
+    Route::put('/owner/store-operational-schedule', [StoreOperationalController::class, 'updateSchedule'])->name('owner.store-operational-schedule.update');
+    Route::post('/owner/store-operational-schedule/status', [StoreOperationalController::class, 'updateStatus'])->name('owner.store-operational-schedule.status');
+
 });

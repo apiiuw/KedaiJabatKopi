@@ -75,9 +75,17 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-x-5 md:gap-x-10 gap-y-20 px-10 mt-16 md:mt-28">
 
             <div class="relative max-w-sm flex flex-col justify-center p-4 md:p-2 bg-white border border-gray-200 rounded-b-lg shadow-sm">
+                @if($isStoreOpen)
                 <a href="/detail-item/MENU3685?category=Drink" class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-greenJagat text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
                     <i class="fa-solid fa-plus"></i>
                 </a>
+                @else
+                    <button type="button"
+                        onclick="storeClosedAlert()"
+                        class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-gray-400 cursor-not-allowed text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                @endif
 
                 <img src="{{ asset('img/home/special-menu-coffe-latte.jpg') }}" class="w-28 h-28 md:w-56 md:h-56 rounded-full border-4 md:border-8 border-greenJagat object-cover -mt-16 md:-mt-24" alt="The Drink">
 
@@ -88,9 +96,17 @@
             </div>
 
             <div class="relative max-w-sm flex flex-col justify-center p-4 md:p-2 bg-white border border-gray-200 rounded-b-lg shadow-sm">
+                @if($isStoreOpen)
                 <a href="/detail-item/MENU8754?category=Drink" class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-greenJagat text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
                     <i class="fa-solid fa-plus"></i>
                 </a>
+                @else
+                    <button type="button"
+                        onclick="storeClosedAlert()"
+                        class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-gray-400 cursor-not-allowed text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                @endif
 
                 <img src="{{ asset('img/home/special-menu-espresso.jpg') }}" class="w-28 h-28 md:w-56 md:h-56 rounded-full border-4 md:border-8 border-greenJagat object-cover -mt-16 md:-mt-24" alt="The Drink">
 
@@ -101,9 +117,18 @@
             </div>
 
             <div class="relative max-w-sm flex flex-col justify-center p-4 md:p-2 bg-white border border-gray-200 rounded-b-lg shadow-sm">
-                <a href="/detail-item/MENU9531?category=Drink" class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-greenJagat text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
-                    <i class="fa-solid fa-plus"></i>
-                </a>
+                @if($isStoreOpen)
+                    <a href="/detail-item/MENU9531?category=Drink" 
+                    class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-greenJagat text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
+                        <i class="fa-solid fa-plus"></i>
+                    </a>
+                @else
+                    <button type="button"
+                        onclick="storeClosedAlert()"
+                        class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-gray-400 cursor-not-allowed text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                @endif
 
                 <img src="{{ asset('img/home/special-menu-sally-cinnamon.jpg') }}" class="w-28 h-28 md:w-56 md:h-56 rounded-full border-4 md:border-8 border-greenJagat object-cover -mt-16 md:-mt-24" alt="The Drink">
 
@@ -114,9 +139,17 @@
             </div>
 
             <div class="relative max-w-sm flex flex-col justify-center p-4 md:p-2 bg-white border border-gray-200 rounded-b-lg shadow-sm">
+                @if($isStoreOpen)
                 <a href="/detail-item/MENU1646?category=Drink" class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-white hover:bg-gray-300 transition duration-500 ease-in-out text-greenJagat text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
                     <i class="fa-solid fa-plus"></i>
                 </a>
+                @else
+                    <button type="button"
+                        onclick="storeClosedAlert()"
+                        class="absolute -top-5 -right-5 w-10 md:w-12 h-10 md:h-12 bg-gray-400 cursor-not-allowed text-white text-lg md:text-xl rounded-full flex justify-center items-center shadow-md">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                @endif
 
                 <img src="{{ asset('img/home/special-menu-matcha.jpg') }}" class="w-28 h-28 md:w-56 md:h-56 rounded-full border-4 md:border-8 border-greenJagat object-cover -mt-16 md:-mt-24" alt="The Drink">
 
@@ -160,8 +193,8 @@
 </div>
 
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if(session('message'))
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             Swal.fire({
                 icon: "{{ session('status') === 'success' ? 'success' : (session('status') === 'error' ? 'error' : 'info') }}",
@@ -180,6 +213,18 @@
             });
         </script>
     @endif
+
+    <script>
+    function storeClosedAlert() {
+        Swal.fire({
+            icon: 'info',
+            title: 'Store Closed',
+            text: 'Sorry, we are currently closed. Please check our operating hours.',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2E6342'
+        });
+    }
+    </script>
 @endpush
 
 

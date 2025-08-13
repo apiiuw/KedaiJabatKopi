@@ -13,8 +13,7 @@ class PastOrderController extends Controller
     {
         $title = 'Cashier Past Orders';
 
-        $query = Order::where('status', 'complete')
-            ->whereDate('created_at', '<', Carbon::today());
+        $query = Order::whereDate('created_at', '<', Carbon::today());
 
         // Flag filter/search
         $isFiltered = false;

@@ -111,6 +111,19 @@
                   <span class="flex-1 ms-3 whitespace-nowrap">Access Control</span>
                </a>
             </li>
+            <li>
+               <a href="{{ route('owner.store-operational-schedule') }}" 
+                  class="{{ request()->is('owner/store-operational-schedule') 
+                     ? 'bg-greenJagat text-white' 
+                     : 'hover:bg-lightGreenJagat' }} 
+                     flex items-center p-2 text-greenJagat rounded-lg group transition duration-500 ease-in-out">
+
+                  <i class="fa-solid fa-store fa-lg shrink-0 text-greenJagat transition duration-500 ease-in-out 
+                  {{ request()->is('owner/store-operational-schedule') 
+                           ? 'text-white' : '' }}"></i>
+                  <span class="flex-1 ms-3 whitespace-nowrap">Store Operational Schedule</span>
+               </a>
+            </li>
          </ul>
          <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-300">
             <li>
