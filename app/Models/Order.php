@@ -19,6 +19,7 @@ class Order extends Model
         'table_number',
         'total_amount',
         'status',
+        'queue_number',
     ];
 
     public function items()

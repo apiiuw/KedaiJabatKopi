@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use Illuminate\Support\Carbon;
+use App\Mail\OrderStatusMail;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
     public function index(Request $request)
     {
-        $title = 'Cashier Order';
+        $title = 'Cashier Today Order';
         $date  = Carbon::now()->translatedFormat('d F Y');
 
         $query = Order::with(['items.menu'])
@@ -87,15 +89,17 @@ class OrderController extends Controller
         $order = Order::where('id_order', $id_order)->firstOrFail();
 
         if ($order->status === 'on going') {
-            // Kalau sudah on going → ubah jadi complete
             $order->status = 'complete';
             $order->save();
 
+            Mail::to($order->email)->send(new OrderStatusMail($order));
+
             return back()->with('successFinish', "Order #$id_order has been finished successfully.");
         } else {
-            // Kalau belum on going → ubah jadi on going
             $order->status = 'on going';
             $order->save();
+
+            Mail::to($order->email)->send(new OrderStatusMail($order));
 
             return back()->with('successOnGoing', "Order #$id_order has been processed successfully.");
         }

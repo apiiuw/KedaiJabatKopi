@@ -149,7 +149,7 @@
                         <td class="px-6 py-4">
                            {{ \Carbon\Carbon::parse($order->created_at)->format('H.i') }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 pl-20">
                            {{ $order->table_number }}
                         </td>
                         <td class="px-6 py-4">

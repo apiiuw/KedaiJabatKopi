@@ -236,8 +236,10 @@
     <div class="info-box">
         <p><strong>Hello, {{ $order->name }}! 🍃</strong></p>
 
-        <strong>Order ID:</strong> {{ $order->id_order }}<br>
+        <strong>Order ID:</strong> {{ $order->id_order }}<br> 
         <strong>Table Number:</strong> {{ $order->table_number }}<br>
+        <strong>Status Order:</strong> {{ ucwords($order->status) }}<br>
+        <strong>Queue Number:</strong> {{ $order->queue_number }}<br>
 
         <p>Thank you for stopping by <em>Jabat Kopi</em>. Your special order is now brewing with care.</p>
     </div>

@@ -114,15 +114,21 @@ class PaymentController extends Controller
             return $cart->menu->price * $cart->quantity;
         });
 
+        // Hitung nomor antrian hari ini
+        $today = now()->toDateString();
+        $lastQueue = Order::whereDate('created_at', $today)->max('queue_number');
+        $queueNumber = $lastQueue ? $lastQueue + 1 : 1;
+
         // Simpan order
         $order = Order::create([
-            'id_order' => $orderId,
-            'id_user' => $idUser,
-            'name' => $name,
-            'email' => $email,
-            'table_number' => $tableNumber,
-            'total_amount' => $total,
-            'status' => 'paid',
+            'id_order'      => $orderId,
+            'id_user'       => $idUser,
+            'name'          => $name,
+            'email'         => $email,
+            'table_number'  => $tableNumber,
+            'total_amount'  => $total,
+            'status'        => 'paid',
+            'queue_number'  => $queueNumber, // simpan nomor antrian
         ]);
 
         // Kirim email struk
@@ -140,6 +146,8 @@ class PaymentController extends Controller
         return redirect()->route('customer.home')->with([
             'status' => 'success',
             'message' => 'Payment successful! Your order is being processed.',
+            'queue_number' => $queueNumber,
         ]);
+
     }
 }

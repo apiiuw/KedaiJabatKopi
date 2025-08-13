@@ -11,7 +11,7 @@ class OrderRecordsController extends Controller
 {
     public function index(Request $request)
     {
-        $title = 'Owner Past Orders';
+        $title = 'Owner Order Records';
 
         $query = Order::query();
 
@@ -56,7 +56,7 @@ class OrderRecordsController extends Controller
         } else {
             // default: terbaru dulu
             $query->orderBy('created_at', 'desc');
-        }
+        } 
 
         // Data filtered
         $orders         = (clone $query)->get();
@@ -64,14 +64,10 @@ class OrderRecordsController extends Controller
         $totalIncomePast= (clone $query)->sum('total_amount');
         $countPastOrders= (clone $query)->count();
 
-        // Data total tanpa filter (tetap)
-        $totalIncomePastAll = Order::where('status', 'complete')
-            ->whereDate('created_at', '<', Carbon::today())
-            ->sum('total_amount');
+        // Semua data tanpa filter status dan tanpa filter tanggal
+        $totalIncomePastAll = Order::sum('total_amount');
 
-        $countPastOrdersAll = Order::where('status', 'complete')
-            ->whereDate('created_at', '<', Carbon::today())
-            ->count();
+        $countPastOrdersAll = Order::count();
 
         // Flag sort untuk toast
         $isSorted       = in_array($sort, ['date','amount']);

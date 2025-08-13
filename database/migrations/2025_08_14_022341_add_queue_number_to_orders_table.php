@@ -8,15 +8,15 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::table('expenses', function (Blueprint $table) {
-            $table->string('id_expenses', 8)->unique()->after('id'); 
+        Schema::table('orders', function (Blueprint $table) {
+            $table->unsignedInteger('queue_number')->nullable()->after('status');
         });
     }
 
     public function down()
     {
-        Schema::table('expenses', function (Blueprint $table) {
-            $table->dropColumn('id_expenses');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropColumn('queue_number');
         });
     }
 

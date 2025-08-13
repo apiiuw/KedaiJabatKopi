@@ -166,7 +166,15 @@
             Swal.fire({
                 icon: "{{ session('status') === 'success' ? 'success' : (session('status') === 'error' ? 'error' : 'info') }}",
                 title: "{{ ucfirst(session('status')) }}",
-                text: "{{ session('message') }}",
+                html: `
+                    @if(session('queue_number'))
+                        <p style="font-size: 1.2rem; margin: 5px 0; color: #555;">Your Queue Number</p>
+                        <h1 style="font-size: 4rem; margin: 5px 0 15px; color: #2E6342;">
+                            {{ session('queue_number') }}
+                        </h1>
+                    @endif
+                    <p>{{ session('message') }}</p>
+                `,
                 confirmButtonText: 'OK',
                 confirmButtonColor: '#2E6342',
             });
