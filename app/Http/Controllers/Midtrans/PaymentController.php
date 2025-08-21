@@ -30,11 +30,16 @@ class PaymentController extends Controller
         $total = $carts->sum('price');
         $order_id = 'ORDER-' . time();
 
+        // Mendapatkan jenis pesanan (Dine In atau Takeaway)
+        $orderType = $request->input('order_type');
+        $tableNumber = ($orderType == 'Dine In') ? $request->input('table_number') : null;
+
         session([
             'id_user' => $idUser,
             'customer_name' => $request->name,
             'customer_email' => $request->email,
-            'customer_table_number' => $request->table_number,
+            'customer_order_type' => $orderType,
+            'customer_table_number' => $tableNumber,
             'latest_order_id' => $order_id,
         ]);
 
@@ -74,18 +79,20 @@ class PaymentController extends Controller
         $name = session('customer_name');
         $email = session('customer_email');
         $tableNumber = session('customer_table_number');
+        $orderType = session('customer_order_type'); // Mendapatkan order_type dari session
 
         if (!$idUser || !$orderId) {
             return redirect()->route('customer.home')->with([
                 'status' => 'error',
-                'message' => 'Order session not found. Please try again.',
+                'message' => 'Order session tidak ditemukan. Silakan coba lagi.',
             ]);
         }
 
+        // Mengecek apakah order sudah diproses sebelumnya
         if (Order::where('id_order', $orderId)->exists()) {
             return redirect()->route('customer.home')->with([
                 'status' => 'success',
-                'message' => 'Order already processed.',
+                'message' => 'Order sudah diproses.',
             ]);
         }
 
@@ -94,7 +101,7 @@ class PaymentController extends Controller
         if ($carts->isEmpty()) {
             return redirect()->route('customer.home')->with([
                 'status' => 'error',
-                'message' => 'Cart is empty or already processed.',
+                'message' => 'Keranjang kosong atau sudah diproses.',
             ]);
         }
 
@@ -114,40 +121,42 @@ class PaymentController extends Controller
             return $cart->menu->price * $cart->quantity;
         });
 
-        // Hitung nomor antrian hari ini
+        // Menghitung nomor antrian hari ini
         $today = now()->toDateString();
         $lastQueue = Order::whereDate('created_at', $today)->max('queue_number');
         $queueNumber = $lastQueue ? $lastQueue + 1 : 1;
 
-        // Simpan order
+        // Menyimpan order dan order_type
         $order = Order::create([
             'id_order'      => $orderId,
             'id_user'       => $idUser,
             'name'          => $name,
             'email'         => $email,
-            'table_number'  => $tableNumber,
+            'table_number'  => $tableNumber, // Akan null jika Takeaway
+            'order_type'    => $orderType, // Menyimpan tipe pesanan
             'total_amount'  => $total,
             'status'        => 'paid',
-            'queue_number'  => $queueNumber, // simpan nomor antrian
+            'queue_number'  => $queueNumber, // Menyimpan nomor antrian
         ]);
 
-        // Kirim email struk
+        // Mengirim email struk
         Mail::to($email)->send(new PaymentReceiptMail($order->load('items.menu')));
 
-        // Bersihkan cart dan session
+        // Membersihkan keranjang dan session
         Cart::where('id_user', $idUser)->delete();
         session()->forget([
             'customer_name',
             'customer_email',
+            'customer_order_type',
             'customer_table_number',
             'latest_order_id',
         ]);
 
         return redirect()->route('customer.home')->with([
             'status' => 'success',
-            'message' => 'Payment successful! Your order is being processed.',
+            'message' => 'Pembayaran berhasil! Pesanan Anda sedang diproses.',
             'queue_number' => $queueNumber,
         ]);
-
     }
+
 }

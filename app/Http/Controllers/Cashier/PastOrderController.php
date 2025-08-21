@@ -59,13 +59,12 @@ class PastOrderController extends Controller
         $countPastOrders= (clone $query)->count();
 
         // Data total tanpa filter (tetap)
-        $totalIncomePastAll = Order::where('status', 'complete')
-            ->whereDate('created_at', '<', Carbon::today())
+        $totalIncomePastAll = Order::whereDate('created_at', '<', Carbon::today())
             ->sum('total_amount');
 
-        $countPastOrdersAll = Order::where('status', 'complete')
-            ->whereDate('created_at', '<', Carbon::today())
+        $countPastOrdersAll = Order::whereDate('created_at', '<', Carbon::today())
             ->count();
+
 
         // Flag sort untuk toast
         $isSorted       = in_array($sort, ['date','amount']);

@@ -16,6 +16,7 @@ class Order extends Model
         'id_user',
         'name',
         'email',
+        'order_type',
         'table_number',
         'total_amount',
         'status',

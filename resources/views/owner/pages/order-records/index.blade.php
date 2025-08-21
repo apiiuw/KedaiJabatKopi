@@ -119,6 +119,9 @@
                         </a>
                      </th>
                      <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                        Order Type
+                     </th>
+                     <th scope="col" class="px-6 py-3 whitespace-nowrap">
                         No. Table
                      </th>
                      <th scope="col" class="px-6 py-3 whitespace-nowrap">
@@ -153,7 +156,10 @@
                            {{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}
                         </td>
                         <td class="px-6 py-4">
-                           {{ $order->table_number }}
+                           {{ $order->order_type }}
+                        </td>
+                        <td class="px-6 py-4">
+                           {{ $order->table_number ?? '-' }}
                         </td>
                         <td class="px-6 py-4">
                            {{ $order->name }}

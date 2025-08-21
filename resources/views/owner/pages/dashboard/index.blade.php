@@ -95,6 +95,15 @@
             </div>
             <i class="fa-solid fa-universal-access text-greenJagat text-xl"></i>
          </a>
+
+         <a href="{{ route('owner.store-operational-schedule') }}"
+            class="flex items-center justify-between bg-white hover:bg-lightGreenJagat border border-gray-200 rounded-md p-4 hover:shadow transition duration-500 ease-in-out">
+            <div>
+               <div class="text-sm text-gray-500">Go to</div>
+               <div class="text-greenJagat font-semibold">Store Operational Schedule</div>
+            </div>
+            <i class="fa-solid fa-store text-greenJagat text-xl"></i>
+         </a>
       </div>
 
       {{-- Grafik Pendapatan vs Pengeluaran Hari Ini --}}

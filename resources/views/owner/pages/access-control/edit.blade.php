@@ -48,13 +48,6 @@
                     <input type="email" value="{{ $user->email }}" class="w-full border rounded-md p-2 bg-gray-100 text-gray-500 cursor-not-allowed" disabled>
                 </div>
 
-                {{-- Password (hidden / tidak ditampilkan) --}}
-                {{-- Kalau mau tetap tampil tapi disabled --}}
-                <div>
-                    <label class="block font-semibold mb-1 text-greenJagat">Password</label>
-                    <input type="password" value="********" class="w-full border rounded-md p-2 bg-gray-100 text-gray-500 cursor-not-allowed" disabled>
-                </div>
-
                 {{-- Submit Button --}}
                 <div class="pt-4">
                     <button type="submit" class="bg-greenJagat hover:bg-darkGreenJagat text-white px-6 py-2 rounded-md transition duration-300">

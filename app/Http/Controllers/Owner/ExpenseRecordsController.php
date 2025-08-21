@@ -47,6 +47,21 @@ class ExpenseRecordsController extends Controller
             $query->orderBy('created_at', 'desc');
         }
 
+        $from = $request->input('from');
+        $to   = $request->input('to');
+
+        if ($from && $to && $from > $to) {
+            [$from, $to] = [$to, $from];  // Menukar jika tanggal 'from' lebih besar dari 'to'
+        }
+        if ($from) {
+            $query->whereDate('created_at', '>=', $from);
+            $isFiltered = true;
+        }
+        if ($to) {
+            $query->whereDate('created_at', '<=', $to);
+            $isFiltered = true;
+        }
+
         $expenses = $query->get();
         $filteredCount = $expenses->count();
 

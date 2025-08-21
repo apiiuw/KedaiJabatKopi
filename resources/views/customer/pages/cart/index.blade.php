@@ -90,28 +90,53 @@
             style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
     </div>
 
-
         <!-- Form Input Name, Email, Table -->
         <div class="mt-6 w-full max-w-md bg-white shadow-md p-6 rounded-md border border-gray-300 space-y-4">
             <h1 class="text-lg text-center text-greenJagat font-calistoga">Tell Me Your Contact!</h1>
+
+            <!-- Name Input -->
             <div>
                 <label for="name" class="block text-gray-700 text-sm mb-1">Name</label>
                 <input type="text" id="name" name="name" placeholder="Your name"
                     class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-greenJagat">
             </div>
 
+            <!-- Email Input -->
             <div>
                 <label for="email" class="block text-gray-700 text-sm mb-1">Email</label>
                 <input type="email" id="email" name="email" placeholder="you@example.com"
                     class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-greenJagat">
             </div>
 
+            <!-- Dine In / Takeaway Selection -->
             <div>
+                <label for="order_type" class="block text-gray-700 text-sm mb-1">Order Type</label>
+                <div class="relative inline-block w-full">
+                    <!-- Slider Button Container -->
+                    <div class="flex items-center justify-between bg-white border border-greenJagat rounded w-full">
+                        <!-- Dine In Option -->
+                        <input type="radio" id="dine_in" name="order_type" value="Dine In" onclick="changeBackground(); toggleTableInput(true);" class="hidden" />
+                        <label for="dine_in" id="dine_in_label" class="order-btn text-center w-1/2 text-greenJagat font-semibold py-2 px-6 rounded cursor-pointer transition-colors duration-200">
+                            Dine In
+                        </label>
+
+                        <!-- Takeaway Option -->
+                        <input type="radio" id="takeaway" name="order_type" value="Takeaway" onclick="changeBackground(); toggleTableInput(false);" class="hidden" />
+                        <label for="takeaway" id="takeaway_label" class="order-btn text-center w-1/2 text-greenJagat font-semibold py-2 px-6 rounded cursor-pointer transition-colors duration-200">
+                            Takeaway
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Number Input (Visible only if Dine In is selected) -->
+            <div id="table-input" class="hidden">
                 <label for="table" class="block text-gray-700 text-sm mb-1">Table Number</label>
-                <input type="number" id="table" name="table_number" placeholder="e.g. 7"
+                <input type="number" id="table" name="table_number" placeholder="e.g. 7" max="35" oninput="validateTableNumber(this)"
                     class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-greenJagat">
             </div>
 
+            <!-- Checkout Button -->
             <button
                 type="button"
                 id="pay-button"
@@ -180,6 +205,41 @@
 </div>
 
 @push('scripts')
+
+    <script>
+        // Fungsi untuk mengubah background dan teks warna ketika radio button diklik
+        function changeBackground() {
+            // Reset semua label ke kondisi default
+            document.getElementById('dine_in_label').classList.remove('bg-greenJagat', 'text-white');
+            document.getElementById('takeaway_label').classList.remove('bg-greenJagat', 'text-white');
+            
+            // Cek apakah radio button Dine In atau Takeaway yang dipilih
+            if (document.getElementById('dine_in').checked) {
+                document.getElementById('dine_in_label').classList.add('bg-greenJagat', 'text-white');
+            } else if (document.getElementById('takeaway').checked) {
+                document.getElementById('takeaway_label').classList.add('bg-greenJagat', 'text-white');
+            }
+        }
+    </script>
+
+    <script>
+        function toggleTableInput(isDineIn) {
+            const tableInput = document.getElementById("table-input");
+            if (isDineIn) {
+                tableInput.classList.remove("hidden");
+            } else {
+                tableInput.classList.add("hidden");
+            }
+        }
+
+        function validateTableNumber(input) {
+            // Cek apakah nilai input lebih besar dari 35
+            if (input.value > 35) {
+                input.value = 35;  // Set nilai ke 35 jika lebih
+            }
+        }
+    </script>
+
     @if(session('success'))
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -221,40 +281,49 @@
             document.getElementById('confirmModal').classList.add('hidden');
         }
 
-        function submitCheckout() {
-            closeConfirmModal();
+    function submitCheckout() {
+        closeConfirmModal();
 
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const table = document.getElementById('table').value;
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const table = document.getElementById('table').value;
+        const orderType = document.querySelector('input[name="order_type"]:checked').value; // Ambil nilai order_type yang dipilih
 
-            fetch('{{ route('customer.checkout') }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({ name, email, table_number: table })
+        // Pastikan data dikirim ke controller dengan benar
+        fetch('{{ route('customer.checkout') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                name, 
+                email, 
+                table_number: (orderType === 'Dine In') ? table : null, // Kirim null jika Takeaway
+                order_type: orderType
             })
-            .then(response => response.json())
-            .then(data => {
-                window.snap.pay(data.snap_token, {
-                    onSuccess: function(result) {
-                        console.log("Success:", result);
-                        window.location.href = "/payment/success";
-                    },
-                    onPending: function(result) {
-                        console.log("Pending:", result);
-                    },
-                    onError: function(result) {
-                        console.log("Error:", result);
-                    },
-                    onClose: function() {
-                        console.log("User closed the popup");
-                    }
-                });
+        })
+        .then(response => response.json())
+        .then(data => {
+            window.snap.pay(data.snap_token, {
+                onSuccess: function(result) {
+                    console.log("Success:", result);
+                    window.location.href = "/payment/success";
+                },
+                onPending: function(result) {
+                    console.log("Pending:", result);
+                },
+                onError: function(result) {
+                    console.log("Error:", result);
+                },
+                onClose: function() {
+                    console.log("User closed the popup");
+                }
             });
-        }
+        });
+    }
+
+
     </script>
 @endpush
 

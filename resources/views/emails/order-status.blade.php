@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Order Status Update</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Calistoga&display=swap" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Calistoga&display=swap" rel="stylesheet"> --}}
     <style>
         body {
-            font-family: 'Amiri', serif;
+            font-family: 'Times New Roman', Times, serif;
             background-color: #f9f9f9;
             padding: 20px;
             color: #333;
@@ -19,7 +19,7 @@
             border-radius: 8px 8px 0 0;
         }
         .header h2 {
-            font-family: 'Calistoga', cursive;
+            font-family: 'Dancing Script', 'Cursive', sans-serif;
             margin: 0;
         }
         .info-box {
@@ -30,6 +30,7 @@
             max-width: 600px;
             border-radius: 6px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            color: #333;
         }
         .footer {
             font-size: 12px;
@@ -43,6 +44,7 @@
 
     <!-- Header -->
     <div class="header">
+        <img src="https://raw.githubusercontent.com/apiiuw/KedaiJabatKopi/main/public/img/icon/icon.png" alt="Jabat Kopi Logo">
         <h2>Kedai Jabat Kopi</h2>
     </div>
 
@@ -51,7 +53,12 @@
         <p><strong>Hello, {{ $order->name }}! 🍃</strong></p>
 
         <strong>Order ID:</strong> {{ $order->id_order }}<br> 
-        <strong>Table Number:</strong> {{ $order->table_number }}<br>
+        @if ($order->order_type == 'Takeaway')
+            <strong>Order Type:</strong> {{ ucwords($order->order_type) }}<br>
+        @else
+            <strong>Order Type:</strong> {{ ucwords($order->order_type) }}<br>
+            <strong>Table Number:</strong> {{ $order->table_number ?? '-' }}<br>
+        @endif
         <strong>Status Order:</strong> {{ ucwords($order->status) }}<br>
 
         @if ($order->status === 'on going')

@@ -116,7 +116,10 @@
                         </a>
                      </th>
                      <th scope="col" class="px-6 py-3">
-                        Table Number
+                        Order Type
+                     </th>
+                     <th scope="col" class="px-6 py-3">
+                        No. Table
                      </th>
                      <th scope="col" class="px-6 py-3">
                         Name
@@ -149,8 +152,11 @@
                         <td class="px-6 py-4">
                            {{ \Carbon\Carbon::parse($order->created_at)->format('H.i') }}
                         </td>
-                        <td class="px-6 py-4 pl-20">
-                           {{ $order->table_number }}
+                        <td class="px-6 py-4">
+                           {{ $order->order_type }}
+                        </td>
+                        <td class="px-6 py-4">
+                           {{ $order->table_number ?? '-' }}
                         </td>
                         <td class="px-6 py-4">
                            {{ $order->name }}
@@ -231,20 +237,24 @@
             <span>: #{{ $order->id_order }}</span>
          </div>
          <div class="flex">
-            <span class="font-semibold w-32">Table Number</span>
-            <span>: {{ $order->table_number }}</span>
+            <span class="font-semibold w-32">Order Type</span>
+            <span>: {{ $order->order_type }}</span>
          </div>
          <div class="flex">
             <span class="font-semibold w-32">Name</span>
             <span>: {{ $order->name }}</span>
          </div>
          <div class="flex">
-            <span class="font-semibold w-32">Total Amount</span>
-            <span>: Rp {{ number_format($order->total_amount, 0, ',', '.') }}</span>
+            <span class="font-semibold w-32">Table Number</span>
+            <span>: {{ $order->table_number ?? '-' }}</span>
          </div>
-         <div class="flex col-span-2">
+         <div class="flex">
             <span class="font-semibold w-32">Status</span>
             <span>: {{ ucwords($order->status) }}</span>
+         </div>
+         <div class="flex">
+            <span class="font-semibold w-32">Total Amount</span>
+            <span>: Rp {{ number_format($order->total_amount, 0, ',', '.') }}</span>
          </div>
       </div>
 

@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ResetPasswordMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -101,4 +107,96 @@ class AuthController extends Controller
             return redirect('/auth/sign-in')->withErrors(['google' => 'Google login failed!']);
         }
     }
+
+    public function forgotPassword()
+    {
+        $title = 'Forgot Password';
+        return view('auth.pages.forgot-password.index', compact('title'));
+    }
+
+    public function sendResetLink(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        // Cek apakah email terdaftar di database
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            session()->flash('error', 'We could not find a user with that email address.');
+            return back(); // Redirect kembali jika email tidak ditemukan
+        }
+
+        // Membuat token reset password
+        $token = Password::createToken($user);
+
+        // Kirimkan email reset password menggunakan Mailable
+        Mail::to($request->email)->send(new ResetPasswordMail($user, $token));
+
+        session()->flash('status', 'Password reset link has been sent!');
+        return back();
+    }
+
+    public function resetPasswordForm($token)
+    {
+        $title = 'Reset Password';
+
+        // Cek apakah token sudah ada di tabel password_resets
+        $resetPasswordEntry = DB::table('password_resets')->where('token', $token)->first();
+
+        // Jika token sudah ada di password_resets (sudah digunakan)
+        if ($resetPasswordEntry) {
+            return view('auth.pages.reset-password.index', [
+                'token' => $token,
+                'error' => 'This reset token has already been used.'
+            ]);
+        }
+
+        // Token valid, tampilkan form reset password
+        return view('auth.pages.reset-password.index', compact('token'));
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6|confirmed',
+            'token' => 'required',
+        ]);
+
+        // Mengecek apakah token sudah ada di tabel password_resets
+        $resetEntry = DB::table('password_resets')->where('token', $request->token)->first();
+
+        if ($resetEntry) {
+            // Jika token sudah ada di password_resets, tampilkan error
+            return back()->withErrors(['token' => 'This reset token has already been used.']);
+        }
+
+        // Melakukan reset password
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user) use ($request) {
+                $user->password = Hash::make($request->password); // Update password
+                $user->save();
+            }
+        );
+
+        if ($status === Password::PASSWORD_RESET) {
+            // Simpan email dan token yang telah digunakan ke dalam tabel password_resets
+            DB::table('password_resets')->insert([
+                'email' => $request->email,
+                'token' => $request->token,
+                'created_at' => now(),  // Simpan waktu reset
+            ]);
+
+            return redirect()->route('auth.sign-in')->with('status', 'Password successfully reset.');
+        } else {
+            return back()->withErrors(['email' => 'Failed to reset password.']);
+        }
+    }
+
+
+
+
 }

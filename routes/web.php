@@ -39,6 +39,14 @@ Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('a
 Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
 Route::get('/auth/sign-out', [AuthController::class, 'signOut'])->name('auth.sign-out');
 
+// FORGOT PASSWORD
+Route::get('/auth/forgot-password', [AuthController::class, 'forgotPassword'])->name('auth.forgot-password');
+Route::post('/auth/forgot-password', [AuthController::class, 'sendResetLink'])->name('auth.send-reset-link');
+
+// Reset Password Route (custom route)
+Route::get('/auth/reset-password/{token}', [AuthController::class, 'resetPasswordForm'])->name('auth.reset-password');
+Route::post('/auth/reset-password', [AuthController::class, 'resetPassword'])->name('auth.update-password');
+
 // ROLE CUSTOMER
 Route::get('/', [HomeController::class, 'index'])->name('customer.home');
 Route::get('/menu', [MenuController::class, 'index'])->name('customer.menu');

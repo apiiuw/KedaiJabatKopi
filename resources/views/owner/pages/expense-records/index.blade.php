@@ -40,10 +40,10 @@
             </div>
 
             {{-- Filter category di kanan --}}
-            <div class="flex items-end gap-3">
+            <div class="flex flex-col md:flex-row items-start md:items-end gap-3">
                <div class="flex flex-col">
-               <label for="category" class="text-sm font-medium text-gray-700">Category</label>
-                  <select id="category" name="category" class="border border-gray-300 rounded-md px-3 py-2">
+                  <label for="category" class="text-sm font-medium text-gray-700">Category</label>
+                  <select id="category" name="category" class="border border-gray-300 rounded-md px-3 py-2" onchange="this.form.submit()">
                      <option value="" {{ request('category')==='' ? 'selected' : '' }}>All Category</option>
                      @foreach($categories as $cat)
                         <option value="{{ $cat }}" {{ request('category')===$cat ? 'selected' : '' }}>
@@ -53,9 +53,27 @@
                   </select>
                </div>
 
+               {{-- Start Date --}}
+               <div class="flex flex-col">
+                  <label for="from" class="text-sm font-medium text-gray-700">Start Date</label>
+                  <input type="date" id="from" name="from" value="{{ request('from') }}"
+                           class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-greenJagat">
+               </div>
+
+               <div class="flex flex-col items-center justify-center px-0 py-2">
+                  -
+               </div>
+
+               {{-- End Date --}}
+               <div class="flex flex-col">
+                  <label for="to" class="text-sm font-medium text-gray-700">End Date</label>
+                  <input type="date" id="to" name="to" value="{{ request('to') }}"
+                           class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-greenJagat">
+               </div>
+
                <button type="submit"
                      class="px-4 py-2 bg-greenJagat hover:bg-darkGreenJagat text-white rounded-md transition duration-500 ease-in-out">
-               Set Filter
+               Set Period
                </button>
                <a href="{{ route('owner.expense-records') }}"
                   class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md transition duration-500 ease-in-out">

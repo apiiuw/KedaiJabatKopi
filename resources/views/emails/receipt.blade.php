@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Payment Receipt</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Calistoga&display=swap" rel="stylesheet">
+
     <style>
+        /* @import url('https://fonts.googleapis.com/css2?family=Amiri&family=Calistoga&display=swap'); */
         @media (max-width: 600px) {
             body {
                 font-size: 12px !important;
@@ -52,7 +52,7 @@
         }
 
         body {
-            font-family: 'Amiri', serif;
+            font-family: 'Times New Roman', Times, serif;
             background-color: #f9f9f9;
             padding: 20px;
             color: #333;
@@ -73,7 +73,7 @@
         }
 
         .header h2 {
-            font-family: 'Calistoga', cursive;
+            font-family: 'Dancing Script', 'Cursive', sans-serif;
             font-size: clamp(20px, 3vw, 28px);
             margin: 0;
         }
@@ -84,7 +84,7 @@
                 margin-bottom: 5px;
             }
             .header h2 {
-                font-family: 'Calistoga', cursive;
+                font-family: 'Dancing Script', 'Cursive', sans-serif;
                 font-size: 18px; 
                 margin: 0;
             }
@@ -237,7 +237,12 @@
         <p><strong>Hello, {{ $order->name }}! 🍃</strong></p>
 
         <strong>Order ID:</strong> {{ $order->id_order }}<br> 
-        <strong>Table Number:</strong> {{ $order->table_number }}<br>
+        @if ($order->order_type == 'Takeaway')
+            <strong>Order Type:</strong> {{ ucwords($order->order_type) }}<br>
+        @else
+            <strong>Order Type:</strong> {{ ucwords($order->order_type) }}<br>
+            <strong>Table Number:</strong> {{ $order->table_number ?? '-' }}<br>
+        @endif
         <strong>Status Order:</strong> {{ ucwords($order->status) }}<br>
         <strong>Queue Number:</strong> {{ $order->queue_number }}<br>
 
@@ -247,15 +252,13 @@
 
     <!-- Receipt -->
     <div class="receipt-container" style="font-family: monospace;">
-        <div class="corner top-left"></div>
-        <div class="corner bottom-right"></div>
 
         <div class="receipt-header">Your Receipt</div>
 
         <table class="receipt-table">
             <thead>
                 <tr>
-                    <th>Item</th>
+                    <th style="text-align: left">Item</th>
                     <th>Price</th>
                     <th>Qty</th>
                     <th>Total</th>
@@ -264,7 +267,7 @@
             <tbody>
                 @foreach ($order->items as $item)
                     <tr>
-                        <td>
+                        <td style="text-align: left">
                             {{ $item->menu->product_name }}
                             <div class="description-desktop">
                                 @if ($item->description)

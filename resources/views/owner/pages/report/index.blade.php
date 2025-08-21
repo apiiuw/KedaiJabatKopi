@@ -48,7 +48,7 @@
       <div class="bg-white p-4 rounded-lg shadow mb-6">
          <form action="{{ route('owner.report') }}" method="GET" class="flex flex-col md:flex-row gap-4 items-end">
             <div>
-               <label class="block mb-1 font-semibold">Start Date</label>
+               <label class="block mb-1 text-sm">Start Date</label>
                <input 
                   type="date" 
                   name="start_date" 
@@ -58,7 +58,7 @@
                >
             </div>
             <div>
-               <label class="block mb-1 font-semibold">End Date</label>
+               <label class="block mb-1 text-sm">End Date</label>
                <input 
                   type="date" 
                   name="end_date" 

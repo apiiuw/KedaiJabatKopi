@@ -51,7 +51,7 @@
       </div>
       <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
       <div class="flex items-center sm:justify-between md:justify-center">
-          <span class="text-sm md:text-lg text-white sm:text-center">© 2025 <a href="#" class="hover:underline transition duration-500 ease-in-out">Kedai Jabat Kopi™</a>. All Rights Reserved.
+          <span class="text-sm md:text-lg text-white sm:text-center">© 2025 <a href="/" class="hover:underline transition duration-500 ease-in-out">Kedai Jabat Kopi™</a>. All Rights Reserved.
           </span>
       </div>
     </div>

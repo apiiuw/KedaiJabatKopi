@@ -108,6 +108,9 @@
                         </a>
                      </th>
                      <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                        Order Type
+                     </th>
+                     <th scope="col" class="px-6 py-3 whitespace-nowrap">
                         No. Table
                      </th>
                      <th scope="col" class="px-6 py-3 whitespace-nowrap">
@@ -142,7 +145,10 @@
                            {{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}
                         </td>
                         <td class="px-6 py-4">
-                           {{ $order->table_number }}
+                           {{ $order->order_type }}
+                        </td>
+                        <td class="px-6 py-4">
+                           {{ $order->table_number ?? '-' }}
                         </td>
                         <td class="px-6 py-4">
                            {{ $order->name }}
@@ -151,9 +157,23 @@
                            Rp {{ number_format($order->total_amount, 0, ',', '.') }}
                         </td>
                         <td class="px-6 py-4">
-                           <span class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded">
-                              {{ ucwords($order->status) }}
-                           </span>
+                           @if ($order->status == 'paid')
+                              <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">
+                                    {{ ucwords($order->status) }}
+                              </span>
+                           @elseif ($order->status == 'on going')
+                              <span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-2.5 py-0.5 rounded">
+                                    {{ ucwords($order->status) }}
+                              </span>
+                           @elseif ($order->status == 'complete')
+                              <span class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded">
+                                    {{ ucwords($order->status) }}
+                              </span>
+                           @else
+                              <span class="bg-gray-100 text-gray-800 text-sm font-medium px-2.5 py-0.5 rounded">
+                                    {{ ucwords($order->status) }}
+                              </span>
+                           @endif
                         </td>
                         <td class="px-6 py-4 text-right font-calistoga">
                            <button type="button"
